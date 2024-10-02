@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float jumpPower = 1;
-    public float speed = 1;
-    public bool isOnPlatform = false;
-    public bool controlsEnabled = false;
+    [SerializeField]
+    private float jumpPower = 1;
+
+    [SerializeField]
+    private float speed = 1;
+
+    private bool isOnPlatform = false; // are we able to jump?
+    private bool controlsEnabled = false; // have we finished the opening scene?
+
+    // tells us whether the player has jumped for the first time, useful for spawning platforms
+    private bool hasJumped = false;
 
     private Subscription<PlatformTouchEvent> starterPlatTouchSub;
     private Rigidbody rb;
@@ -33,6 +40,12 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && isOnPlatform)
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpPower);
+
+                // if we haven't jumped for the first time, spawn our platforms
+                if(!hasJumped)
+                {
+
+                }
             }
 
             float horizInput = Input.GetAxis("Horizontal");
@@ -70,5 +83,20 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {
         EventBus.Unsubscribe(starterPlatTouchSub);
+    }
+}
+
+public class PlayerFirstJumpEvent
+{
+    GameObject player;
+
+    public PlayerFirstJumpEvent(GameObject player)
+    {
+        this.player = player;
+    }
+
+    public override string ToString()
+    {
+        return this.player.name;
     }
 }
