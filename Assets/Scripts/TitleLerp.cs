@@ -8,6 +8,7 @@ public class TitleLerp : MonoBehaviour
     public float slerpSpeed = 1f;
     public bool doLerp = false;
     public bool hasLerped = false;
+    public GameObject instructionsText;
 
     private Subscription<PlatformTouchEvent> platTouchSub;
     private float startTime;
@@ -48,6 +49,8 @@ public class TitleLerp : MonoBehaviour
             {
                 doLerp = false;
                 hasLerped = true;
+
+                instructionsText.SetActive(true);
             }
         }
     }
