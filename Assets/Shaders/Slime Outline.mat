@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Fade_Distance: 75
-    - _Outline_Thickness: 0.0158
+    - _Outline_Thickness: 0.019
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
