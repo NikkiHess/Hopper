@@ -367,7 +367,6 @@ GameObject:
   - component: {fileID: 220250913}
   - component: {fileID: 220250916}
   - component: {fileID: 220250915}
-  - component: {fileID: 220250917}
   m_Layer: 6
   m_Name: EyeL
   m_TagString: Untagged
@@ -385,10 +384,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.6612171, y: -0, z: -0, w: 0.75019467}
   m_LocalPosition: {x: -0.2, y: 0.2, z: -0.467}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalScale: {x: 0.03, y: 0.030000003, z: 0.030000003}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1536625738}
+  m_Father: {fileID: 1284701708}
   m_LocalEulerAnglesHint: {x: -82.786, y: 0, z: 0}
 --- !u!23 &220250915
 MeshRenderer:
@@ -441,19 +440,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220250912}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &220250917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220250912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befa9d1bfba28b8488566963efe2812c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deformationStrength: 1
 --- !u!1 &237480001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +1688,6 @@ GameObject:
   - component: {fileID: 1217109861}
   - component: {fileID: 1217109864}
   - component: {fileID: 1217109863}
-  - component: {fileID: 1217109865}
   m_Layer: 6
   m_Name: Smile
   m_TagString: Untagged
@@ -1718,12 +1703,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217109860}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: -0.048, z: -0.502}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: -0.047999572, z: -0.502}
+  m_LocalScale: {x: 0.03, y: 0.030000001, z: 0.030000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1536625738}
+  m_Father: {fileID: 1284701708}
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &1217109863
 MeshRenderer:
@@ -1775,19 +1760,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217109860}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1217109865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1217109860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befa9d1bfba28b8488566963efe2812c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deformationStrength: 1
 --- !u!1 &1265559126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,6 +1894,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265559126}
   m_CullTransparentMesh: 1
+--- !u!1 &1284701707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1284701708}
+  m_Layer: 6
+  m_Name: Face
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1284701708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284701707}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 220250913}
+  - {fileID: 1889204896}
+  - {fileID: 1217109861}
+  m_Father: {fileID: 1536625738}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1536625738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6500244447051666234, guid: 1075ee861bf195a4880b79e75aa43a89,
@@ -2042,7 +2048,6 @@ GameObject:
   - component: {fileID: 1889204896}
   - component: {fileID: 1889204899}
   - component: {fileID: 1889204898}
-  - component: {fileID: 1889204900}
   m_Layer: 6
   m_Name: EyeR
   m_TagString: Untagged
@@ -2060,10 +2065,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.6612171, y: -0, z: -0, w: 0.75019467}
   m_LocalPosition: {x: 0.2, y: 0.2, z: -0.467}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalScale: {x: 0.03, y: 0.030000003, z: 0.030000003}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1536625738}
+  m_Father: {fileID: 1284701708}
   m_LocalEulerAnglesHint: {x: -82.786, y: 0, z: 0}
 --- !u!23 &1889204898
 MeshRenderer:
@@ -2116,19 +2121,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889204895}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1889204900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1889204895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befa9d1bfba28b8488566963efe2812c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deformationStrength: 1
 --- !u!1 &2018721401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,15 +2604,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6500244447051666234, guid: 1075ee861bf195a4880b79e75aa43a89,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 220250913}
-    - targetCorrespondingSourceObject: {fileID: 6500244447051666234, guid: 1075ee861bf195a4880b79e75aa43a89,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1889204896}
-    - targetCorrespondingSourceObject: {fileID: 6500244447051666234, guid: 1075ee861bf195a4880b79e75aa43a89,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1217109861}
+      addedObject: {fileID: 1284701708}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1075ee861bf195a4880b79e75aa43a89, type: 3}
 --- !u!1660057539 &9223372036854775807
