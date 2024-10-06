@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BottomlessPlatform : MonoBehaviour
+public class OneWayPlatform : MonoBehaviour
 {
     private BoxCollider boxCollider;
     private void Start()

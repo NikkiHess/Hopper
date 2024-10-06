@@ -41,7 +41,7 @@ public class TitleLerp : MonoBehaviour
         float dist = (Time.time - startTime) * slerpSpeed;
         float progress = dist / journeyLength;
 
-        if(doLerp)
+        if(doLerp && !hasLerped)
         {
             transform.position = Vector3.Slerp(transform.position, targetPos, progress);
 

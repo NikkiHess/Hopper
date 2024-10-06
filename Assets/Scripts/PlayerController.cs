@@ -41,10 +41,17 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpPower);
 
-                // if we haven't jumped for the first time, spawn our platforms
+                // if we jump for the first time...
+                // publish a first jump event
+                // spawn our platforms
                 if(!hasJumped)
                 {
-
+                    EventBus.Publish(new PlayerJumpEvent(gameObject, true));
+                    hasJumped = true;
+                }
+                else
+                {
+                    EventBus.Publish(new PlayerJumpEvent(gameObject, false));
                 }
             }
 
@@ -77,12 +84,6 @@ public class PlayerController : MonoBehaviour
             {
                 isOnPlatform = false;
             }
-
-            // starter platform separation (first jump)
-            if(go.CompareTag("Starter Platform"))
-            {
-                EventBus.Publish(new PlayerFirstJumpEvent(gameObject));
-            }
         }
     }
 
@@ -92,13 +93,15 @@ public class PlayerController : MonoBehaviour
     }
 }
 
-public class PlayerFirstJumpEvent
+public class PlayerJumpEvent
 {
-    GameObject player;
+    public GameObject player;
+    public bool firstJump = false;
 
-    public PlayerFirstJumpEvent(GameObject player)
+    public PlayerJumpEvent(GameObject player, bool firstJump)
     {
         this.player = player;
+        this.firstJump = firstJump;
     }
 
     public override string ToString()
