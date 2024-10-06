@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4943111008494492335}
   - component: {fileID: -3900693193637471580}
   - component: {fileID: 5344048420601122650}
+  - component: {fileID: 7660247689593360929}
+  - component: {fileID: 767742186261446055}
   m_Layer: 6
   m_Name: Hopper
   m_TagString: Player
@@ -149,3 +151,29 @@ MonoBehaviour:
   jumpPower: 10
   speed: 5
   hasJumped: 0
+--- !u!114 &7660247689593360929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065420358037715074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476c84ec81779f449299f893c4aa70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasDoneGameOver: 0
+--- !u!114 &767742186261446055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065420358037715074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a90e5a320a11d45b5b55df94e7b67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0

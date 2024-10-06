@@ -29,13 +29,13 @@ public class PlayerController : MonoBehaviour
     {
         if (controlsEnabled)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && isOnPlatform)
+            if (Input.GetKey(KeyCode.Space) && isOnPlatform)
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpPower);
 
                 // if we jump for the first time...
                 // publish a first jump event
-                // spawn our platforms
+                // and spawn our platforms
                 if(!hasJumped)
                 {
                     EventBus.Publish(new PlayerJumpEvent(gameObject, true));
