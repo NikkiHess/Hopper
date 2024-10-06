@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.ikaroon.tmp3d": "file:C:/Users/nkhess/Downloads/TMP3D-main",
+    "com.ikaroon.tmp3d": "https://github.com/Ikaroon/TMP3D.git",
     "com.unity.collab-proxy": "2.5.2",
     "com.unity.ide.rider": "3.0.31",
     "com.unity.ide.visualstudio": "2.0.22",

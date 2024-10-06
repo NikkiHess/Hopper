@@ -77,6 +77,12 @@ public class PlayerController : MonoBehaviour
             {
                 isOnPlatform = false;
             }
+
+            // starter platform separation (first jump)
+            if(go.CompareTag("Starter Platform"))
+            {
+                EventBus.Publish(new PlayerFirstJumpEvent(gameObject));
+            }
         }
     }
 
@@ -97,6 +103,6 @@ public class PlayerFirstJumpEvent
 
     public override string ToString()
     {
-        return this.player.name;
+        return player.name;
     }
 }
