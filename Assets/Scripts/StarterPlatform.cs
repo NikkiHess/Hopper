@@ -9,6 +9,12 @@ public class StarterPlatform : MonoBehaviour
             EventBus.Publish(new PlatformTouchEvent(gameObject));
         }
     }
+
+    // like magic...
+    public void Disappear()
+    {
+        gameObject.SetActive(false);
+    }
 }
 
 public class PlatformTouchEvent

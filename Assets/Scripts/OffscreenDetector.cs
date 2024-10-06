@@ -1,41 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OffscreenDetector : MonoBehaviour
 {
-    [SerializeField] bool hasDoneGameOver = false;
+    public UnityEvent onOffscreen;
 
-    private void Update()
+    Renderer goRenderer;
+    Vector3 renderTop;
+    Material outline;
+
+    private void Start()
     {
-        if (!hasDoneGameOver)
+        goRenderer = GetComponent<Renderer>();
+
+        // get the outline material to be used in calculating top
+        foreach (Material material in goRenderer.materials)
         {
-            Vector3 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
-
-            // if we're off the bottom of the screen, game over
-            if (viewportPosition.y < 0)
+            if (material.name.Contains("Outline"))
             {
-                hasDoneGameOver = true;
-
-                // trigger game over
-                ScoreTracker scoreTracker = GetComponent<ScoreTracker>();
-                EventBus.Publish(new GameOverEvent(scoreTracker.score));
+                outline = material;
+                break;
             }
         }
     }
-}
 
-public class GameOverEvent
-{
-    public int finalScore;
-
-    public GameOverEvent(int finalScore)
+    private void Update()
     {
-        this.finalScore = finalScore;
-    }
+        Bounds rendererBounds = goRenderer.bounds; // bounds for the platform to make it easy to get the "top" edge
+        // max y and max z ensure we're at the edge of the viewport
+        renderTop = new Vector3(rendererBounds.center.x, rendererBounds.max.y + outline.GetFloat("_Outline_Thickness"), rendererBounds.max.z);
 
-    public override string ToString()
-    {
-        return "Game over! Final score: " + finalScore;
+        Vector3 viewportPosition = Camera.main.WorldToViewportPoint(renderTop);
+
+        // do our callback if we're off the bottom of the screen
+        if (viewportPosition.y < 0 && onOffscreen != null)
+        {
+            onOffscreen.Invoke();
+        }
     }
 }

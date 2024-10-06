@@ -7,7 +7,7 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] GameObject platformPrefab;
     [SerializeField] float maxXMagnitude;
     [SerializeField] float platformSeparation;
-    [SerializeField] float offscreenYThreshold = -8f;  // Y position when platform is off the bottom of the screen
+    [SerializeField] int offscreenNumPlatforms = 4; // # of platforms before we start moving things up
     [SerializeField] int numPlatforms = 6;
 
     // the list of platforms we're populating
@@ -33,10 +33,10 @@ public class PlatformManager : MonoBehaviour
         {
             foreach (GameObject platform in platforms) {
                 float currentDistanceToPlayer = platform.transform.position.y - e.player.transform.position.y;
+                float offscreenDist = -offscreenNumPlatforms * platformSeparation; // ex: -4 * 4 = 16 units before we shuffle out the platform
 
-                Debug.Log(currentDistanceToPlayer);
                 // if the player is high enough, we need to rotate this platform
-                if (currentDistanceToPlayer < offscreenYThreshold)
+                if (currentDistanceToPlayer < offscreenDist)
                 {
                     MovePlatformToTop(platform);
                 }

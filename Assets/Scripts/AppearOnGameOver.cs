@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,6 +19,6 @@ public class AppearOnGameOver : MonoBehaviour
         gameOverBox.SetActive(true);
 
         TMP_Text text = gameOverBox.transform.Find("Final Score Text").GetComponent<TMP_Text>();
-        text.text = "Final Score: " + e.finalScore;
+        text.text = "Final Score: " + e.score;
     }
 }

@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
     public bool hasJumped = false;
 
     private Subscription<PlatformTouchEvent> starterPlatTouchSub;
+    private Subscription<GameOverEvent> gameOverSub;
+
     private Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         starterPlatTouchSub = EventBus.Subscribe<PlatformTouchEvent>(OnStarterPlatformTouch);
+        gameOverSub = EventBus.Subscribe<GameOverEvent>(OnGameOver);
     }
 
     private void Update()
@@ -85,6 +88,12 @@ public class PlayerController : MonoBehaviour
         {
             controlsEnabled = true;
         }
+    }
+
+    // when the game ends, disable controls (just in case)
+    private void OnGameOver(GameOverEvent e)
+    {
+        controlsEnabled = false;
     }
 
     private void OnDestroy()
