@@ -71,6 +71,9 @@
         },
         {
             "m_Id": "e314cf0999de4a0b9c1cef5e771e96c4"
+        },
+        {
+            "m_Id": "d2c820ad301046a289c139567aefe038"
         }
     ],
     "m_GroupDatas": [
@@ -107,6 +110,20 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "23c8606ebcb64aa98b24c9091de5f143"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "1b6ca01e029f4409af2941489da19573"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "d2c820ad301046a289c139567aefe038"
                 },
                 "m_SlotId": 0
             }
@@ -212,9 +229,9 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "ca167f1263194fa59150d29280dddeec"
+                    "m_Id": "d2c820ad301046a289c139567aefe038"
                 },
-                "m_SlotId": 0
+                "m_SlotId": 1
             },
             "m_InputSlot": {
                 "m_Node": {
@@ -590,6 +607,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "236d8242a7ff44e49a62b67ae020d0dc",
+    "m_Id": 0,
+    "m_DisplayName": "In",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "In",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.AddNode",
     "m_ObjectId": "23c8606ebcb64aa98b24c9091de5f143",
     "m_Group": {
@@ -659,6 +700,30 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "2f98e23587a9493e8a2ebed27e1dafe7",
+    "m_Id": 1,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
 }
 
 {
@@ -1776,17 +1841,17 @@
     "m_Type": "UnityEditor.ShaderGraph.NormalVectorNode",
     "m_ObjectId": "ca167f1263194fa59150d29280dddeec",
     "m_Group": {
-        "m_Id": "dfaa3f1d9356417998bdc96673986d10"
+        "m_Id": ""
     },
     "m_Name": "Normal Vector",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -102.28572082519531,
-            "y": 660.5714111328125,
+            "x": -102.28569793701172,
+            "y": 1021.142822265625,
             "width": 206.85714721679688,
-            "height": 133.14288330078126
+            "height": 133.1429443359375
         }
     },
     "m_Slots": [
@@ -1805,6 +1870,42 @@
         "m_SerializableColors": []
     },
     "m_Space": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.NormalizeNode",
+    "m_ObjectId": "d2c820ad301046a289c139567aefe038",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Normalize",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -104.5626220703125,
+            "y": 626.2945556640625,
+            "width": 209.14285278320313,
+            "height": 279.42852783203127
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "236d8242a7ff44e49a62b67ae020d0dc"
+        },
+        {
+            "m_Id": "2f98e23587a9493e8a2ebed27e1dafe7"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
 }
 
 {
@@ -1837,8 +1938,8 @@
     "m_ObjectId": "dfaa3f1d9356417998bdc96673986d10",
     "m_Title": "Inflate Model",
     "m_Position": {
-        "x": -128.0,
-        "y": 396.5713806152344
+        "x": -149.14285278320313,
+        "y": 396.5714416503906
     }
 }
 
