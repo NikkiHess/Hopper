@@ -1,0 +1,2 @@
+- 3D TMP Text - https://github.com/Ikaroon/TMP3D
+- Outline Shader - https://www.youtube.com/watch?v=VGIkT9fPh7Y
