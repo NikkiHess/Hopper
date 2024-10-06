@@ -6,6 +6,8 @@ public class CameraFollowPlayer : MonoBehaviour
     private Subscription<PlayerJumpEvent> jumpSub;
     GameObject player = null;
 
+    float offset;
+
     private void Start()
     {
         jumpSub = EventBus.Subscribe<PlayerJumpEvent>(OnPlayerFirstJump);
@@ -17,7 +19,7 @@ public class CameraFollowPlayer : MonoBehaviour
         {
             transform.position = new Vector3(
                 transform.position.x,
-                player.transform.position.y + 5.35f,
+                player.transform.position.y + offset,
                 transform.position.z
             );
         }
@@ -30,6 +32,7 @@ public class CameraFollowPlayer : MonoBehaviour
         {
             followPlayer = true;
             player = e.player;
+            offset = transform.position.y - player.transform.position.y;
         }
     }
 
