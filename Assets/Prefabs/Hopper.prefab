@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4943111008494492335}
   - component: {fileID: -3900693193637471580}
   - component: {fileID: 5344048420601122650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hopper
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065420358037715074}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -146,5 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb02167367638874384f7e2dae1e2bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 1
-  speed: 2
+  jumpPower: 10
+  speed: 5
+  hasJumped: 0

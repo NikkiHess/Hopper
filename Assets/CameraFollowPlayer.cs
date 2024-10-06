@@ -6,7 +6,7 @@ public class CameraFollowPlayer : MonoBehaviour
     private Subscription<PlayerJumpEvent> jumpSub;
     GameObject player = null;
 
-    float offset;
+    public float offset;
 
     private void Start()
     {
@@ -17,11 +17,17 @@ public class CameraFollowPlayer : MonoBehaviour
     {
         if (followPlayer)
         {
-            transform.position = new Vector3(
+            Vector3 newPos = new Vector3(
                 transform.position.x,
                 player.transform.position.y + offset,
                 transform.position.z
             );
+
+            // the camera should ONLY move up
+            if (newPos.y > transform.position.y)
+            {
+                transform.position = newPos;
+            }
         }
     }
 

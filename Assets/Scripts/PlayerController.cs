@@ -25,14 +25,6 @@ public class PlayerController : MonoBehaviour
         starterPlatTouchSub = EventBus.Subscribe<PlatformTouchEvent>(OnStarterPlatformTouch);
     }
 
-    private void OnStarterPlatformTouch(PlatformTouchEvent e)
-    {
-        if(e.isStarterPlatform)
-        {
-            controlsEnabled = true;
-        }
-    }
-
     private void Update()
     {
         if (controlsEnabled)
@@ -84,6 +76,14 @@ public class PlayerController : MonoBehaviour
             {
                 isOnPlatform = false;
             }
+        }
+    }
+
+    private void OnStarterPlatformTouch(PlatformTouchEvent e)
+    {
+        if (e.isStarterPlatform)
+        {
+            controlsEnabled = true;
         }
     }
 
