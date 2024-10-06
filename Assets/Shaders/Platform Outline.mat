@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Outline
+  m_Name: Platform Outline
   m_Shader: {fileID: -6465566751694194690, guid: c9f9588747602f048a2490b69a7ea324,
     type: 3}
   m_Parent: {fileID: 0}
