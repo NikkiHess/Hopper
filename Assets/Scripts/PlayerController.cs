@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool controlsEnabled = false; // have we finished the opening scene?
 
     // tells us whether the player has jumped for the first time, useful for spawning platforms
-    private bool hasJumped = false;
+    public bool hasJumped = false;
 
     private Subscription<PlatformTouchEvent> starterPlatTouchSub;
     private Rigidbody rb;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnStarterPlatformTouch(PlatformTouchEvent e)
     {
-        if(e.platform.CompareTag("Starter Platform"))
+        if(e.isStarterPlatform)
         {
             controlsEnabled = true;
         }

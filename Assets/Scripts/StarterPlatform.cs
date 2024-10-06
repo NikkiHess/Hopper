@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StarterPlatform : MonoBehaviour
@@ -16,9 +14,11 @@ public class StarterPlatform : MonoBehaviour
 public class PlatformTouchEvent
 {
     public GameObject platform;
+    public bool isStarterPlatform = false;
     public PlatformTouchEvent(GameObject platform)
     {
         this.platform = platform;
+        isStarterPlatform = platform.CompareTag("Starter Platform");
     }
 
     public override string ToString()

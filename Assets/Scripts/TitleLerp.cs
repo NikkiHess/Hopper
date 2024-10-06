@@ -18,23 +18,19 @@ public class TitleLerp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        platTouchSub = EventBus.Subscribe<PlatformTouchEvent>(OnPlatformTouch);
+        platTouchSub = EventBus.Subscribe<PlatformTouchEvent>(OnStarterPlatformTouch);
 
         targetPos = new Vector3(transform.position.x, targetY, transform.position.z);
         journeyLength = Vector3.Distance(transform.position, targetPos);
     }
 
-    void OnPlatformTouch(PlatformTouchEvent e)
+    void OnStarterPlatformTouch(PlatformTouchEvent e)
     {
-        Debug.Log(e.ToString());
-
-        if (!hasLerped)
+        // only lerp if we haven't yet
+        if (!hasLerped && e.isStarterPlatform)
         {
-            if (e.platform.CompareTag("Starter Platform"))
-            {
-                doLerp = true;
-                startTime = Time.time;
-            }
+            doLerp = true;
+            startTime = Time.time;
         }
     }
 
