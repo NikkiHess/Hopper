@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TitleLerp : MonoBehaviour
 {
-    public Vector3 targetPos; // to slerp to
-    public float slerpSpeed = 1f;
+    public float targetY = 0;
+    public float lerpSpeed = 1f;
     public bool doLerp = false;
     public bool hasLerped = false;
     public GameObject instructionsText;
@@ -13,12 +13,14 @@ public class TitleLerp : MonoBehaviour
     private Subscription<PlatformTouchEvent> platTouchSub;
     private float startTime;
     private float journeyLength;
+    private Vector3 targetPos;
 
     // Start is called before the first frame update
     void Start()
     {
         platTouchSub = EventBus.Subscribe<PlatformTouchEvent>(OnPlatformTouch);
 
+        targetPos = new Vector3(transform.position.x, targetY, transform.position.z);
         journeyLength = Vector3.Distance(transform.position, targetPos);
     }
 
@@ -38,12 +40,12 @@ public class TitleLerp : MonoBehaviour
 
     private void Update()
     {
-        float dist = (Time.time - startTime) * slerpSpeed;
+        float dist = (Time.time - startTime) * lerpSpeed;
         float progress = dist / journeyLength;
 
         if(doLerp && !hasLerped)
         {
-            transform.position = Vector3.Slerp(transform.position, targetPos, progress);
+            transform.position = Vector3.Lerp(transform.position, targetPos, progress);
 
             if(Vector3.Distance(transform.position, targetPos) < 0.01f)
             {
