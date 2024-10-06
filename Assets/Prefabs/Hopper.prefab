@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4943111008494492335}
   - component: {fileID: -3900693193637471580}
   - component: {fileID: 5344048420601122650}
+  - component: {fileID: 2217556309255411989}
   - component: {fileID: 7660247689593360929}
   - component: {fileID: 767742186261446055}
   m_Layer: 6
@@ -149,9 +150,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb02167367638874384f7e2dae1e2bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 9
-  speed: 5
+  jumpPower: 9.5
+  speed: 6
   hasJumped: 0
+--- !u!114 &2217556309255411989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065420358037715074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff94a770a4112a488f097461f43fe8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasDoneGameOver: 0
 --- !u!114 &7660247689593360929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +178,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8476c84ec81779f449299f893c4aa70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasDoneGameOver: 0
+  onOffscreen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2217556309255411989}
+        m_TargetAssemblyTypeName: GameEnder, Assembly-CSharp
+        m_MethodName: EndGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &767742186261446055
 MonoBehaviour:
   m_ObjectHideFlags: 0
