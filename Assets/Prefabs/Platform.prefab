@@ -119,4 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1b2a6aec2d04a40b9f7533d4da1ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  translucent:
+  - {fileID: 2100000, guid: c65f5f4b6a4357c4aad3512aa81a9b8f, type: 2}
+  - {fileID: 2100000, guid: 160bd46cea6d2b448b61b8d35a96059f, type: 2}
+  nonTranslucent:
+  - {fileID: 2100000, guid: 2e9ef0b8b8b55bd48800a172b6898a5b, type: 2}
+  - {fileID: 2100000, guid: aec7277659d561e4a8e2b5da49e50906, type: 2}
   inverted: 0

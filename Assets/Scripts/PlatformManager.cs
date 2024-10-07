@@ -17,7 +17,7 @@ public class PlatformManager : MonoBehaviour
 
     [SerializeField] Material invertedBase, invertedTranslucentBase;
     [SerializeField] Material invertedOutline, invertedTranslucentOutline;
-    [SerializeField] Material baseMat, translucentBaseMat;
+    [SerializeField] Material _base, translucentBase;
     [SerializeField] Material outline, translucentOutline;
 
     // the list of platforms we're populating
@@ -66,10 +66,10 @@ public class PlatformManager : MonoBehaviour
                             inverted = false;
                         }
                     }
-                    // we're not planning to invert, make sure we're base material
+                    // we're not planning to invert, make sure we're base
                     else
                     {
-
+                        UninvertPlatform(platform);
                     }
 
                     generations++;
@@ -143,11 +143,28 @@ public class PlatformManager : MonoBehaviour
     {
         Renderer platRenderer = platform.GetComponent<Renderer>();
 
-        Material[] invertedTranslucentMats = new[] { invertedTranslucentBase, invertedTranslucentOutline };
-        platRenderer.materials = invertedTranslucentMats;
+        //Material[] invertedMats = new[] { invertedBase, invertedOutline };
+        //Material[] invertedTranslucentMats = new[] { invertedTranslucentBase, invertedTranslucentOutline };
+        //platRenderer.materials = invertedTranslucentMats;
 
         OneWayPlatform owp = platform.GetComponent<OneWayPlatform>();
         owp.inverted = true;
+        owp.nonTranslucent = new[] { invertedBase, invertedOutline };
+        owp.translucent = new[] { invertedTranslucentBase, invertedTranslucentOutline };
+    }
+
+    void UninvertPlatform(GameObject platform)
+    {
+        Renderer platRenderer = platform.GetComponent<Renderer>();
+
+        //Material[] mats = new[] { _base, outline };
+        //Material[] translucentMats = new[] { translucentBase, translucentOutline };
+        //platRenderer.materials = translucentMats;
+
+        OneWayPlatform owp = platform.GetComponent<OneWayPlatform>();
+        owp.inverted = false;
+        owp.nonTranslucent = new[] { _base, outline };
+        owp.translucent = new[] { translucentBase, translucentOutline };
     }
 
     private float GetRandomX()

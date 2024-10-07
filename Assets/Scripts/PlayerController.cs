@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,18 +22,27 @@ public class PlayerController : MonoBehaviour
     private Subscription<GameOverEvent> gameOverSub;
 
     private Rigidbody rb;
+    private Renderer _renderer;
+
+    float leftCameraEdgeX, rightCameraEdgeX;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         starterPlatTouchSub = EventBus.Subscribe<PlatformTouchEvent>(OnStarterPlatformTouch);
         gameOverSub = EventBus.Subscribe<GameOverEvent>(OnGameOver);
+
+        _renderer = GetComponent<Renderer>();
+
+        // since the camera only moves up, we can get the camera edges right off the start
+        CalculateEdgePositions();
     }
 
     private void Update()
     {
         if (controlsEnabled)
         {
+            // handle jumping
             if (Input.GetKey(KeyCode.Space) && isOnPlatform)
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpPower);
@@ -50,10 +61,33 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            // handle horizontal movement
             float horizInput = Input.GetAxis("Horizontal");
             if (Mathf.Abs(horizInput) > 0)
             {
                 rb.velocity = new Vector3(horizInput * speed, rb.velocity.y);
+            }
+
+            // handle moving off screen
+            Bounds rendererBounds = _renderer.bounds;
+
+            Vector3 renderLeft = new Vector3(rendererBounds.min.x, rendererBounds.center.y, rendererBounds.center.z);
+            Vector3 renderRight = new Vector3(rendererBounds.max.x, rendererBounds.center.y, rendererBounds.center.z);
+
+            Vector3 viewportLeft = Camera.main.WorldToViewportPoint(renderLeft);
+            Vector3 viewportRight = Camera.main.WorldToViewportPoint(renderRight);
+
+            // off the left side of the screen?
+            if (viewportRight.x < 0)
+            {
+                Debug.Log("off left");
+                transform.position = new Vector3(rightCameraEdgeX, transform.position.y, transform.position.z);
+            }
+            // off the right side of the screen?
+            else if (viewportLeft.x > 1)
+            {
+                Debug.Log("off right");
+                transform.position = new Vector3(leftCameraEdgeX, transform.position.y, transform.position.z);
             }
         }
     }
@@ -100,6 +134,21 @@ public class PlayerController : MonoBehaviour
     {
         EventBus.Unsubscribe(starterPlatTouchSub);
         EventBus.Unsubscribe(gameOverSub);
+    }
+
+    private void CalculateEdgePositions()
+    {
+        // Use the player's initial position to determine depth
+        Vector3 playerPosition = transform.position;
+        float cameraZ = Camera.main.WorldToViewportPoint(playerPosition).z;
+
+        // Left edge in world space
+        Vector3 leftEdgeWorldPosition = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, cameraZ));
+        leftCameraEdgeX = leftEdgeWorldPosition.x;
+
+        // Right edge in world space
+        Vector3 rightEdgeWorldPosition = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, cameraZ));
+        rightCameraEdgeX = rightEdgeWorldPosition.x;
     }
 }
 

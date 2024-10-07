@@ -2,12 +2,37 @@ using UnityEngine;
 
 public class OneWayPlatform : MonoBehaviour
 {
+    public Material[] translucent, nonTranslucent; // the non-translucent materials
+
     public bool inverted = false;
-    private BoxCollider boxCollider;
+    bool playerInverted = false;
+
+    BoxCollider boxCollider;
+    GameObject player;
+    Renderer _renderer; // the renderer attached to this GameObject
 
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        _renderer = GetComponent<Renderer>();
+    }
+
+    private void Update()
+    {
+        playerInverted = player.GetComponent<PlayerController>().inverted;
+
+        // if the player is in the right dimension, go non-translucent
+        if(inverted == playerInverted)
+        {
+            if(_renderer.materials != nonTranslucent)
+                _renderer.materials = nonTranslucent;
+        }
+        else
+        {
+            if (_renderer.materials != translucent)
+                _renderer.materials = translucent;
+        }
     }
 
     // if we're moving downwards, allow collision

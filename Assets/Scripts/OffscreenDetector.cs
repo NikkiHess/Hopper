@@ -28,7 +28,7 @@ public class OffscreenDetector : MonoBehaviour
     {
         Bounds rendererBounds = goRenderer.bounds; // bounds for the platform to make it easy to get the "top" edge
         // max y and max z ensure we're at the edge of the viewport
-        renderTop = new Vector3(rendererBounds.center.x, rendererBounds.max.y + outline.GetFloat("_Outline_Thickness"), rendererBounds.max.z);
+        renderTop = new Vector3(rendererBounds.center.x, rendererBounds.max.y + outline.GetFloat("_Outline_Thickness") * 2, rendererBounds.max.z);
 
         Vector3 viewportPosition = Camera.main.WorldToViewportPoint(renderTop);
 
