@@ -170,9 +170,9 @@ MonoBehaviour:
     type: 3}
   maxXMagnitude: 4
   platformSeparation: 4
-  offscreenNumPlatforms: 2
-  numPlatformsToGenerate: 6
-  invertedRange: {x: 1, y: 10}
+  offscreenNumPlatforms: 3
+  numPlatformsToGenerate: 8
+  invertedRange: {x: 4, y: 10}
   generations: 0
   invertedSectionTop: 0
   invertedBase: {fileID: 2100000, guid: f857b7ce56659054ba2a1a20cfad946b, type: 2}

@@ -9,7 +9,7 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] float platformSeparation; // how far apart should platforms be?
     [SerializeField] int offscreenNumPlatforms = 4; // # of platforms before we start moving things up
     [SerializeField] int numPlatformsToGenerate = 6; // # of platforms to generate
-    [SerializeField] Vector2 invertedRange; // min and max inverted section sizes
+    [SerializeField] Vector2Int invertedRange; // min and max inverted section sizes
 
     [SerializeField] int generations = 0; // number of times we generated or moved a platform
     bool inverted = false; // invert
@@ -28,6 +28,12 @@ public class PlatformManager : MonoBehaviour
 
     private void Start()
     {
+        // make sure that our inverted range is an actual RANGE
+        if (invertedRange.x >= invertedRange.y)
+        {
+            Debug.LogError("Invalid invertedRange values: Min should be less than Max.");
+        }
+
         jumpSub = EventBus.Subscribe<PlayerJumpEvent>(OnPlayerJump);
     }
 
@@ -133,12 +139,13 @@ public class PlatformManager : MonoBehaviour
         if(UnityEngine.Random.Range(0, 1f) < .25f)
         {
             inverted = true;
-            invertedSectionTop = 
-                generations + 1 +
-                UnityEngine.Random.Range(
-                    (int)invertedRange.x, 
-                    (int)invertedRange.y
-                );
+
+            // Ensure min is less than max
+            int minRange = Mathf.Min(invertedRange.x, invertedRange.y);
+            int maxRange = Mathf.Max(invertedRange.x, invertedRange.y);
+
+            int invertedSectionLength = UnityEngine.Random.Range(minRange, maxRange + 1);
+            invertedSectionTop = generations + 1 + invertedSectionLength;
         }
     }
 
