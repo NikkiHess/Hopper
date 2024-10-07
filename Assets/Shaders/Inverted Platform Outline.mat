@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Translucent Inverted Outline
+  m_Name: Inverted Platform Outline
   m_Shader: {fileID: -6465566751694194690, guid: c9f9588747602f048a2490b69a7ea324,
     type: 3}
   m_Parent: {fileID: 0}
@@ -51,14 +51,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dotted: 1
+    - _Dotted: 0
     - _Fade_Distance: 75
-    - _Outline_Thickness: 0.03
-    - _Pattern_Frequency: 5
-    - _Pattern_Speed: 1
+    - _Outline_Thickness: 0.0326
+    - _Pattern_Frequency: 20
+    - _Pattern_Speed: 2
     - _Pattern_Threshold: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Outline_Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

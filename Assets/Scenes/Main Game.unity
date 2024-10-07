@@ -172,9 +172,19 @@ MonoBehaviour:
   platformSeparation: 4
   offscreenNumPlatforms: 2
   numPlatformsToGenerate: 6
-  invertedRange: {x: 0, y: 0}
+  invertedRange: {x: 1, y: 10}
   generations: 0
   invertedSectionTop: 0
+  invertedBase: {fileID: 2100000, guid: f857b7ce56659054ba2a1a20cfad946b, type: 2}
+  invertedTranslucentBase: {fileID: 2100000, guid: c65f5f4b6a4357c4aad3512aa81a9b8f,
+    type: 2}
+  invertedOutline: {fileID: 2100000, guid: 84bdc8c999593a74794315320e05e333, type: 2}
+  invertedTranslucentOutline: {fileID: 2100000, guid: 160bd46cea6d2b448b61b8d35a96059f,
+    type: 2}
+  baseMat: {fileID: 2100000, guid: 2e9ef0b8b8b55bd48800a172b6898a5b, type: 2}
+  translucentBaseMat: {fileID: 2100000, guid: c36f314f95fdc124bb0600df4b3bb721, type: 2}
+  outline: {fileID: 2100000, guid: aec7277659d561e4a8e2b5da49e50906, type: 2}
+  translucentOutline: {fileID: 2100000, guid: 4cd6c4d9d9af1f944824d078a2382e8e, type: 2}
 --- !u!1 &208860376
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,10 @@ public class PlatformManager : MonoBehaviour
     bool inverted = false; // invert
     [SerializeField] int invertedSectionTop = 0; // the top of the inverted section, if there is one
 
-    [SerializeField] Material invertedTranslucentBase, invertedBase, invertedTranslucentOutline, invertedOutline;
+    [SerializeField] Material invertedBase, invertedTranslucentBase;
+    [SerializeField] Material invertedOutline, invertedTranslucentOutline;
+    [SerializeField] Material baseMat, translucentBaseMat;
+    [SerializeField] Material outline, translucentOutline;
 
     // the list of platforms we're populating
     List<GameObject> platforms = new(); // newer C# syntax?
@@ -62,6 +65,11 @@ public class PlatformManager : MonoBehaviour
                         {
                             inverted = false;
                         }
+                    }
+                    // we're not planning to invert, make sure we're base material
+                    else
+                    {
+
                     }
 
                     generations++;
@@ -123,7 +131,7 @@ public class PlatformManager : MonoBehaviour
         {
             inverted = true;
             invertedSectionTop = 
-                generations + 
+                generations + 1 +
                 UnityEngine.Random.Range(
                     (int)invertedRange.x, 
                     (int)invertedRange.y

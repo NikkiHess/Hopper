@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {
         EventBus.Unsubscribe(starterPlatTouchSub);
+        EventBus.Unsubscribe(gameOverSub);
     }
 }
 

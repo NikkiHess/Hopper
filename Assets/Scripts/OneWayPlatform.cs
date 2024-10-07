@@ -22,6 +22,7 @@ public class OneWayPlatform : MonoBehaviour
             // check if we're moving downwards
             if (player.GetComponent<Rigidbody>().velocity.y < 0)
             {
+                // only allow collision if player + platform are in the same dimension
                 if (inverted == player.GetComponent<PlayerController>().inverted)
                 {
                     // allow collision
