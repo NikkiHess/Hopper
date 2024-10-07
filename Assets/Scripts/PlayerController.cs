@@ -80,14 +80,14 @@ public class PlayerController : MonoBehaviour
             // off the left side of the screen?
             if (viewportRight.x < 0)
             {
-                Debug.Log("off left");
                 transform.position = new Vector3(rightCameraEdgeX, transform.position.y, transform.position.z);
+                inverted = !inverted; // invert, change dimensions
             }
             // off the right side of the screen?
             else if (viewportLeft.x > 1)
             {
-                Debug.Log("off right");
                 transform.position = new Vector3(leftCameraEdgeX, transform.position.y, transform.position.z);
+                inverted = !inverted; // invert, change dimensions
             }
         }
     }

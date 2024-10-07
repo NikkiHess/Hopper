@@ -50,8 +50,6 @@ public class PlatformManager : MonoBehaviour
                 {
                     MovePlatformToTop(platform);
 
-                    DecideInvertSection();
-
                     // we are planning to invert
                     if (inverted)
                     {
@@ -67,9 +65,12 @@ public class PlatformManager : MonoBehaviour
                         }
                     }
                     // we're not planning to invert, make sure we're base
+                    // also decide if we want to invert
                     else
                     {
                         UninvertPlatform(platform);
+
+                        DecideInvertSection();
                     }
 
                     generations++;

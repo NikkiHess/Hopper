@@ -1005,6 +1005,7 @@ GameObject:
   - component: {fileID: 391346669}
   - component: {fileID: 391346668}
   - component: {fileID: 391346671}
+  - component: {fileID: 391346672}
   m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
@@ -1112,6 +1113,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: {x: -0.1, y: 0}
+--- !u!114 &391346672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391346666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25471280bbe35d249a69296ee5bc4ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 2100000, guid: eca061594ca9d4b4ebf74052e587d4d4, type: 2}
+  invertedBackground: {fileID: 2100000, guid: decdd387633c9454ea7bb1faa3767d24, type: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,6 +2575,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hopper
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344048420601122650, guid: 1075ee861bf195a4880b79e75aa43a89,
+        type: 3}
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6500244447051666234, guid: 1075ee861bf195a4880b79e75aa43a89,
         type: 3}
