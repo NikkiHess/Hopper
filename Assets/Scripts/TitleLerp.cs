@@ -48,7 +48,10 @@ public class TitleLerp : MonoBehaviour
                 doLerp = false;
                 hasLerped = true;
 
-                instructionsText.SetActive(true);
+                if (instructionsText.activeSelf && instructionsText != null)
+                {
+                    instructionsText.SetActive(true);
+                }
             }
         }
     }
