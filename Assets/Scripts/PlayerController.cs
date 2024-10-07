@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool inverted = false;
+    public bool hasJumpedForFirstTime = false; // tells us whether the player has jumped for the first time
+
     [SerializeField]
     private float jumpPower = 1;
 
@@ -12,9 +15,6 @@ public class PlayerController : MonoBehaviour
 
     private bool isOnPlatform = false; // are we able to jump?
     private bool controlsEnabled = false; // have we finished the opening scene?
-
-    // tells us whether the player has jumped for the first time, useful for spawning platforms
-    public bool hasJumped = false;
 
     private Subscription<PlatformTouchEvent> starterPlatTouchSub;
     private Subscription<GameOverEvent> gameOverSub;
@@ -39,10 +39,10 @@ public class PlayerController : MonoBehaviour
                 // if we jump for the first time...
                 // publish a first jump event
                 // and spawn our platforms
-                if(!hasJumped)
+                if(!hasJumpedForFirstTime)
                 {
                     EventBus.Publish(new PlayerJumpEvent(gameObject, true));
-                    hasJumped = true;
+                    hasJumpedForFirstTime = true;
                 }
                 else
                 {

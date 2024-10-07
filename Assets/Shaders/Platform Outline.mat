@@ -51,8 +51,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Dotted: 0
     - _Fade_Distance: 75
     - _Outline_Thickness: 0.0326
+    - _Pattern_Frequency: 20
+    - _Pattern_Speed: 2
+    - _Pattern_Threshold: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

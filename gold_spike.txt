@@ -1,0 +1,1 @@
+The novel feature of my game is the ability to shift dimensions in order to make certain platforms accessible and certain enemies and obstacles avoidable. You shift dimensions by leaving the left or right side of the screen, inverting the stage's colors and altering collision - for better or worse.

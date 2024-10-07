@@ -5,13 +5,20 @@ using UnityEngine;
 public class PlatformManager : MonoBehaviour
 {
     [SerializeField] GameObject platformPrefab;
-    [SerializeField] float maxXMagnitude;
-    [SerializeField] float platformSeparation;
+    [SerializeField] float maxXMagnitude; // how far to the side can we go?
+    [SerializeField] float platformSeparation; // how far apart should platforms be?
     [SerializeField] int offscreenNumPlatforms = 4; // # of platforms before we start moving things up
-    [SerializeField] int numPlatforms = 6;
+    [SerializeField] int numPlatformsToGenerate = 6; // # of platforms to generate
+    [SerializeField] Vector2 invertedRange; // min and max inverted section sizes
+
+    [SerializeField] int generations = 0; // number of times we generated or moved a platform
+    bool inverted = false; // invert
+    [SerializeField] int invertedSectionTop = 0; // the top of the inverted section, if there is one
+
+    [SerializeField] Material invertedTranslucentBase, invertedBase, invertedTranslucentOutline, invertedOutline;
 
     // the list of platforms we're populating
-    List<GameObject> platforms = new List<GameObject>();
+    List<GameObject> platforms = new(); // newer C# syntax?
 
     // subscription to player's first jump
     private Subscription<PlayerJumpEvent> jumpSub;
@@ -39,6 +46,25 @@ public class PlatformManager : MonoBehaviour
                 if (currentDistanceToPlayer < offscreenDist)
                 {
                     MovePlatformToTop(platform);
+
+                    DecideInvertSection();
+
+                    // we are planning to invert
+                    if (inverted)
+                    {
+                        // only actually invert if we haven't reached the top of the inverted section
+                        if(generations < invertedSectionTop)
+                        {
+                            InvertPlatform(platform);
+                        }
+                        // otherwise we can reset
+                        else
+                        {
+                            inverted = false;
+                        }
+                    }
+
+                    generations++;
                 }
             }
         }
@@ -47,7 +73,7 @@ public class PlatformManager : MonoBehaviour
     IEnumerator SpawnPlatforms()
     {
         // create numPlatforms platforms for our pool
-        for (int i = 0; i < numPlatforms; i++)
+        for (int i = 0; i < numPlatformsToGenerate; i++)
         {
             Vector3 pos = Vector3.zero;
 
@@ -63,6 +89,8 @@ public class PlatformManager : MonoBehaviour
             GameObject instance = Instantiate(platformPrefab, pos, Quaternion.identity, transform);
 
             platforms.Add(instance);
+
+            generations++;
 
             yield return new WaitForSeconds(0.5f);
         }
@@ -87,6 +115,33 @@ public class PlatformManager : MonoBehaviour
 
         platform.transform.position = newPos;
     }
+
+    void DecideInvertSection()
+    {
+        // 25% chance to start an inverted section of platforms
+        if(UnityEngine.Random.Range(0, 1f) < .25f)
+        {
+            inverted = true;
+            invertedSectionTop = 
+                generations + 
+                UnityEngine.Random.Range(
+                    (int)invertedRange.x, 
+                    (int)invertedRange.y
+                );
+        }
+    }
+
+    void InvertPlatform(GameObject platform)
+    {
+        Renderer platRenderer = platform.GetComponent<Renderer>();
+
+        Material[] invertedTranslucentMats = new[] { invertedTranslucentBase, invertedTranslucentOutline };
+        platRenderer.materials = invertedTranslucentMats;
+
+        OneWayPlatform owp = platform.GetComponent<OneWayPlatform>();
+        owp.inverted = true;
+    }
+
     private float GetRandomX()
     {
         return UnityEngine.Random.Range(-maxXMagnitude, maxXMagnitude);
