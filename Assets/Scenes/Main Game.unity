@@ -299,6 +299,7 @@ MonoBehaviour:
   offscreenNumPlatforms: 2
   numPlatformsToGenerate: 7
   invertedRange: {x: 4, y: 10}
+  percentInvertChance: 5
   invertedBase: {fileID: 2100000, guid: f857b7ce56659054ba2a1a20cfad946b, type: 2}
   invertedTranslucentBase: {fileID: 2100000, guid: c65f5f4b6a4357c4aad3512aa81a9b8f,
     type: 2}

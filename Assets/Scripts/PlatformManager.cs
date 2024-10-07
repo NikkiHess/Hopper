@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlatformManager : MonoBehaviour
 {
+
     [SerializeField] GameObject platformPrefab;
     [SerializeField] float maxXMagnitude; // how far to the side can we go?
     [SerializeField] float platformSeparation; // how far apart should platforms be?
     [SerializeField] int offscreenNumPlatforms = 4; // # of platforms before we start moving things up
     [SerializeField] int numPlatformsToGenerate = 6; // # of platforms to generate
     [SerializeField] Vector2Int invertedRange; // min and max inverted section sizes
+    [SerializeField] [Range(1, 100)] int percentInvertChance = 1;
 
     [SerializeField] Material invertedBase, invertedTranslucentBase;
     [SerializeField] Material invertedOutline, invertedTranslucentOutline;
@@ -166,8 +168,8 @@ public class PlatformManager : MonoBehaviour
 
     void DecideInvertSection()
     {
-        // 25% chance to start an inverted section of platforms
-        if(UnityEngine.Random.Range(0, 1f) < .25f)
+        // percentInvertChance% chance to start an inverted section of platforms
+        if (UnityEngine.Random.Range(0, 1f) < (percentInvertChance / 100f))
         {
             inverted = true;
 
