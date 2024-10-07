@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isOnPlatform = false; // are we able to jump?
     private bool controlsEnabled = false; // have we finished the opening scene?
+    private bool hasInverted = false;
 
     private Subscription<PlatformTouchEvent> starterPlatTouchSub;
     private Subscription<GameOverEvent> gameOverSub;
@@ -97,6 +98,10 @@ public class PlayerController : MonoBehaviour
             {
                 inverted = !inverted; // invert, change dimensions
                 starterPlat.GetComponent<StarterPlatform>().Invert(inverted);
+
+                // we should publish a player invert event here
+                EventBus.Publish(new PlayerInvertEvent(gameObject, !hasInverted));
+                if(!hasInverted) hasInverted = true; // make sure this only happens the first time
             }
         }
     }

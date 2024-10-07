@@ -48,6 +48,14 @@ public class PlatformManager : MonoBehaviour
         // after that, currentPlatform gets moved up after a couple jumps
         else
         {
+            // decide whether to invert section if we haven't yet
+            if(!inverted)
+            {
+                DecideInvertSection();
+            }
+
+            bool firstPlatformMoved = false;
+
             foreach (GameObject platform in platforms) {
                 float currentDistanceToPlayer = platform.transform.position.y - e.player.transform.position.y;
                 float offscreenDist = -offscreenNumPlatforms * platformSeparation; // ex: -4 * 4 = 16 units before we shuffle out the platform
@@ -58,10 +66,32 @@ public class PlatformManager : MonoBehaviour
                     Vector3 newPlatPos = MovePlatformToTop(platform);
 
                     // we are planning to invert
-                    if (inverted)
+                    if (inverted && !firstPlatformMoved)
+                    {
+                        // publish an invert event telling us whether we're  on our first invert
+                        EventBus.Publish(
+                            new SectionInvertEvent(
+                                currentGeneration,
+                                !hasInverted,
+                                platformSeparation,
+                                newPlatPos.x >= 0 // move left if platform is on right side of screen
+                            )
+                        );
+
+                        // if we invert for the first time, we need to put out an event to
+                        // get ready to do a tutorial
+                        if (!hasInverted)
+                        {
+                            hasInverted = true;
+                        }
+
+                        firstPlatformMoved = true;
+                    }
+
+                    if(inverted)
                     {
                         // only actually invert if we haven't reached the top of the inverted section
-                        if(currentGeneration < invertedSectionTop)
+                        if (currentGeneration < invertedSectionTop)
                         {
                             InvertPlatform(platform);
                         }
@@ -78,30 +108,6 @@ public class PlatformManager : MonoBehaviour
                     else
                     {
                         UninvertPlatform(platform);
-
-                        // decide to invert the next section or not
-                        DecideInvertSection();
-
-                        // if we invert, we need to put out in event
-                        if (inverted)
-                        {
-                            // publish an invert event telling us whether we're  on our first invert
-                            EventBus.Publish(
-                                new SectionInvertEvent(
-                                    currentGeneration,
-                                    !hasInverted,
-                                    platformSeparation,
-                                    newPlatPos.x >= 0 // move left if platform is on right side of screen
-                                )
-                            );
-
-                            // if we invert for the first time, we need to put out an event to
-                            // get ready to do a tutorial
-                            if (!hasInverted)
-                            {
-                                hasInverted = true;
-                            }
-                        }
                     }
 
                     currentGeneration++;
@@ -212,11 +218,11 @@ public class SectionInvertEvent
     public bool firstInvert;
     public bool pointingLeft;
 
-    public SectionInvertEvent(int generation, bool firstInvert, float platformSeparation, bool goLeft)
+    public SectionInvertEvent(int generation, bool firstInvert, float platformSeparation, bool pointingLeft)
     {
         this.generation = generation;
         this.firstInvert = firstInvert;
         this.platformSeparation = platformSeparation;
-        this.pointingLeft = goLeft;
+        this.pointingLeft = pointingLeft;
     }
 }

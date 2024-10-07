@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class FirstInvertHandler : MonoBehaviour
+public class TutorialInvertHandler : MonoBehaviour
 {
     [SerializeField] float verticalOffset;
 
@@ -15,13 +15,13 @@ public class FirstInvertHandler : MonoBehaviour
     void Start()
     {
         text = GetComponent<TMP_Text>();
-        firstInvertSub = EventBus.Subscribe<SectionInvertEvent>(DoTutorial);
+        firstInvertSub = EventBus.Subscribe<SectionInvertEvent>(ShowTutorial);
         playerInvertSub = EventBus.Subscribe<PlayerInvertEvent>(HideTutorial);
 
         whichWay = transform.GetChild(0).gameObject;
     }
 
-    void DoTutorial(SectionInvertEvent e)
+    void ShowTutorial(SectionInvertEvent e)
     {
         // only do the tutorial on our first invert
         if(e.firstInvert)
@@ -41,7 +41,15 @@ public class FirstInvertHandler : MonoBehaviour
 
     void HideTutorial(PlayerInvertEvent e)
     {
+        if (e.firstInvert)
+        {
+            text.enabled = false;
 
+            if (whichWay != null)
+            {
+                whichWay.SetActive(false);
+            }
+        }
     }
 
     private void OnDestroy()
