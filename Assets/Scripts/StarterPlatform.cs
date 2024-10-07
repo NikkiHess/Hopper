@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class StarterPlatform : MonoBehaviour
 {
+    [SerializeField] Material _base, outline;
+    [SerializeField] Material invertedBase, invertedOutline;
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player"))
@@ -14,6 +17,19 @@ public class StarterPlatform : MonoBehaviour
     public void Disappear()
     {
         gameObject.SetActive(false);
+    }
+
+    public void Invert(bool inverted)
+    {
+        Renderer r = GetComponent<Renderer>();
+        if (inverted)
+        {
+            r.materials = new[] { invertedBase, invertedOutline };
+        }
+        else
+        {
+            r.materials = new[] { _base, outline };
+        }
     }
 }
 

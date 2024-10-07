@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Renderer _renderer;
+    private GameObject starterPlat;
 
     float leftCameraEdgeX, rightCameraEdgeX;
 
@@ -77,17 +78,25 @@ public class PlayerController : MonoBehaviour
             Vector3 viewportLeft = Camera.main.WorldToViewportPoint(renderLeft);
             Vector3 viewportRight = Camera.main.WorldToViewportPoint(renderRight);
 
+            bool doInvert = false;
+
             // off the left side of the screen?
             if (viewportRight.x < 0)
             {
                 transform.position = new Vector3(rightCameraEdgeX, transform.position.y, transform.position.z);
-                inverted = !inverted; // invert, change dimensions
+                doInvert = true;
             }
             // off the right side of the screen?
             else if (viewportLeft.x > 1)
             {
                 transform.position = new Vector3(leftCameraEdgeX, transform.position.y, transform.position.z);
+                doInvert = true;
+            }
+
+            if(doInvert)
+            {
                 inverted = !inverted; // invert, change dimensions
+                starterPlat.GetComponent<StarterPlatform>().Invert(inverted);
             }
         }
     }
@@ -121,6 +130,7 @@ public class PlayerController : MonoBehaviour
         if (e.isStarterPlatform)
         {
             controlsEnabled = true;
+            starterPlat = e.platform;
         }
     }
 

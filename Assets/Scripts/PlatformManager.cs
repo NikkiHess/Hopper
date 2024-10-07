@@ -11,14 +11,15 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] int numPlatformsToGenerate = 6; // # of platforms to generate
     [SerializeField] Vector2Int invertedRange; // min and max inverted section sizes
 
-    [SerializeField] int generations = 0; // number of times we generated or moved a platform
-    bool inverted = false; // invert
-    [SerializeField] int invertedSectionTop = 0; // the top of the inverted section, if there is one
-
     [SerializeField] Material invertedBase, invertedTranslucentBase;
     [SerializeField] Material invertedOutline, invertedTranslucentOutline;
     [SerializeField] Material _base, translucentBase;
     [SerializeField] Material outline, translucentOutline;
+
+    int currentGeneration = 0; // number of times we generated or moved a platform
+    bool inverted = false; // invert
+    bool hasInverted = false; // have we reached the inverted section for the first time?
+    int invertedSectionTop = 0; // the top of the inverted section, if there is one
 
     // the list of platforms we're populating
     List<GameObject> platforms = new(); // newer C# syntax?
@@ -60,7 +61,7 @@ public class PlatformManager : MonoBehaviour
                     if (inverted)
                     {
                         // only actually invert if we haven't reached the top of the inverted section
-                        if(generations < invertedSectionTop)
+                        if(currentGeneration < invertedSectionTop)
                         {
                             InvertPlatform(platform);
                         }
@@ -78,10 +79,25 @@ public class PlatformManager : MonoBehaviour
                     {
                         UninvertPlatform(platform);
 
+                        // decide to invert the next section or not
                         DecideInvertSection();
+
+                        // if we invert, we need to put out in event
+                        if (inverted)
+                        {
+                            // publish an invert event telling us whether we're  on our first invert
+                            EventBus.Publish(new InvertEvent(currentGeneration, !hasInverted));
+
+                            // if we invert for the first time, we need to put out an event to
+                            // get ready to do a tutorial
+                            if (!hasInverted)
+                            {
+                                hasInverted = true;
+                            }
+                        }
                     }
 
-                    generations++;
+                    currentGeneration++;
                 }
             }
         }
@@ -107,7 +123,7 @@ public class PlatformManager : MonoBehaviour
 
             platforms.Add(instance);
 
-            generations++;
+            currentGeneration++;
 
             yield return new WaitForSeconds(0.5f);
         }
@@ -145,7 +161,7 @@ public class PlatformManager : MonoBehaviour
             int maxRange = Mathf.Max(invertedRange.x, invertedRange.y);
 
             int invertedSectionLength = UnityEngine.Random.Range(minRange, maxRange + 1);
-            invertedSectionTop = generations + 1 + invertedSectionLength;
+            invertedSectionTop = currentGeneration + 1 + invertedSectionLength;
         }
     }
 
@@ -177,5 +193,17 @@ public class PlatformManager : MonoBehaviour
     private void OnDestroy()
     {
         EventBus.Unsubscribe(jumpSub);
+    }
+}
+
+public class InvertEvent
+{
+    public int generation;
+    public bool firstInvert;
+
+    public InvertEvent(int generation, bool firstInvert)
+    {
+        this.generation = generation;
+        this.firstInvert = firstInvert;
     }
 }

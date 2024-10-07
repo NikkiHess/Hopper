@@ -42,13 +42,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha_Clip: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Shade_Size: 0.24
     - _Shades: 0.24
     - _Shading_Size: 0.287
     m_Colors:
-    - _Color: {r: 0.121568635, g: 0.6901961, b: 0.054901965, a: 1}
+    - _Color: {r: 0.12156858, g: 0.6901961, b: 0.054901943, a: 1}
     - _Shade_Range: {r: 0.06, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &89189800890782979
