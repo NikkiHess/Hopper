@@ -55,7 +55,7 @@ public class PlatformManager : MonoBehaviour
                 // if the player is high enough, we need to rotate this platform
                 if (currentDistanceToPlayer < offscreenDist)
                 {
-                    MovePlatformToTop(platform);
+                    Vector3 newPlatPos = MovePlatformToTop(platform);
 
                     // we are planning to invert
                     if (inverted)
@@ -86,7 +86,14 @@ public class PlatformManager : MonoBehaviour
                         if (inverted)
                         {
                             // publish an invert event telling us whether we're  on our first invert
-                            EventBus.Publish(new InvertEvent(currentGeneration, !hasInverted));
+                            EventBus.Publish(
+                                new SectionInvertEvent(
+                                    currentGeneration,
+                                    !hasInverted,
+                                    platformSeparation,
+                                    newPlatPos.x >= 0 // move left if platform is on right side of screen
+                                )
+                            );
 
                             // if we invert for the first time, we need to put out an event to
                             // get ready to do a tutorial
@@ -129,7 +136,7 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    void MovePlatformToTop(GameObject platform)
+    Vector3 MovePlatformToTop(GameObject platform)
     {
         float highestY = float.MinValue;
 
@@ -147,6 +154,8 @@ public class PlatformManager : MonoBehaviour
         newPos.y = highestY + platformSeparation;
 
         platform.transform.position = newPos;
+
+        return newPos;
     }
 
     void DecideInvertSection()
@@ -196,14 +205,18 @@ public class PlatformManager : MonoBehaviour
     }
 }
 
-public class InvertEvent
+public class SectionInvertEvent
 {
     public int generation;
+    public float platformSeparation;
     public bool firstInvert;
+    public bool pointingLeft;
 
-    public InvertEvent(int generation, bool firstInvert)
+    public SectionInvertEvent(int generation, bool firstInvert, float platformSeparation, bool goLeft)
     {
         this.generation = generation;
         this.firstInvert = firstInvert;
+        this.platformSeparation = platformSeparation;
+        this.pointingLeft = goLeft;
     }
 }

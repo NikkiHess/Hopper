@@ -175,6 +175,23 @@ public class PlayerJumpEvent
 
     public override string ToString()
     {
-        return player.name;
+        return "Jumped: " + player.name + ", First Jump: " + firstJump;
+    }
+}
+
+public class PlayerInvertEvent
+{
+    public GameObject player;
+    public bool firstInvert = false;
+
+    public PlayerInvertEvent(GameObject player, bool firstInvert)
+    {
+        this.player = player;
+        this.firstInvert = firstInvert;
+    }
+
+    public override string ToString()
+    {
+        return "Inverted: " + player.name + ", First Invert: " + firstInvert;
     }
 }

@@ -21,4 +21,9 @@ public class AppearOnGameOver : MonoBehaviour
         TMP_Text text = gameOverBox.transform.Find("Final Score Text").GetComponent<TMP_Text>();
         text.text = "Final Score: " + e.score;
     }
+
+    private void OnDestroy()
+    {
+        EventBus.Unsubscribe(gameOverEvent);
+    }
 }
