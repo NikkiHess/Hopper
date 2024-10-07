@@ -61,6 +61,8 @@ public class PlatformManager : MonoBehaviour
                         // otherwise we can reset
                         else
                         {
+                            // explicitly uninvert to avoid bugs
+                            UninvertPlatform(platform);
                             inverted = false;
                         }
                     }
@@ -144,10 +146,6 @@ public class PlatformManager : MonoBehaviour
     {
         Renderer platRenderer = platform.GetComponent<Renderer>();
 
-        //Material[] invertedMats = new[] { invertedBase, invertedOutline };
-        //Material[] invertedTranslucentMats = new[] { invertedTranslucentBase, invertedTranslucentOutline };
-        //platRenderer.materials = invertedTranslucentMats;
-
         OneWayPlatform owp = platform.GetComponent<OneWayPlatform>();
         owp.inverted = true;
         owp.nonTranslucent = new[] { invertedBase, invertedOutline };
@@ -157,10 +155,6 @@ public class PlatformManager : MonoBehaviour
     void UninvertPlatform(GameObject platform)
     {
         Renderer platRenderer = platform.GetComponent<Renderer>();
-
-        //Material[] mats = new[] { _base, outline };
-        //Material[] translucentMats = new[] { translucentBase, translucentOutline };
-        //platRenderer.materials = translucentMats;
 
         OneWayPlatform owp = platform.GetComponent<OneWayPlatform>();
         owp.inverted = false;
