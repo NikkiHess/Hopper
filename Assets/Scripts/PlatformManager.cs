@@ -8,7 +8,6 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] GameObject platformPrefab;
     [SerializeField] float maxXMagnitude; // how far to the side can we go?
     [SerializeField] float platformSeparation; // how far apart should platforms be?
-    [SerializeField] int offscreenNumPlatforms = 4; // # of platforms before we start moving things up
     [SerializeField] int numPlatformsToGenerate = 6; // # of platforms to generate
     [SerializeField] Vector2Int invertedRange; // min and max inverted section sizes
     [SerializeField] [Range(1, 100)] int percentInvertChance = 1;
@@ -23,8 +22,8 @@ public class PlatformManager : MonoBehaviour
     bool hasInverted = false; // have we reached the inverted section for the first time?
     int invertedSectionTop = 0; // the top of the inverted section, if there is one
 
-    // the list of platforms we're populating
-    List<GameObject> platforms = new(); // newer C# syntax?
+    List<GameObject> platforms = new(); // the list of platforms we're populating
+    public List<GameObject> offscreenPlatforms = new();
 
     // subscription to player's first jump
     private Subscription<PlayerJumpEvent> jumpSub;
@@ -40,81 +39,80 @@ public class PlatformManager : MonoBehaviour
         jumpSub = EventBus.Subscribe<PlayerJumpEvent>(OnPlayerJump);
     }
 
+    private void Update()
+    {
+        if (offscreenPlatforms.Count > 0)
+        {
+            // decide whether to invert section if we haven't yet
+            if (!inverted)
+            {
+                DecideInvertSection();
+            }
+        }
+
+        bool firstPlatformMoved = false;
+
+        foreach (GameObject platform in offscreenPlatforms)
+        {
+            Vector3 newPlatPos = MovePlatformToTop(platform);
+
+            // we are planning to invert
+            if (inverted && !firstPlatformMoved)
+            {
+                // publish an invert event telling us whether we're  on our first invert
+                EventBus.Publish(
+                    new SectionInvertEvent(
+                        currentGeneration,
+                        !hasInverted,
+                        platformSeparation,
+                        newPlatPos.x >= 0 // move left if platform is on right side of screen
+                    )
+                );
+
+                // if we invert for the first time, we need to put out an event to
+                // get ready to do a tutorial
+                if (!hasInverted)
+                {
+                    hasInverted = true;
+                }
+
+                firstPlatformMoved = true;
+            }
+
+            if (inverted)
+            {
+                // only actually invert if we haven't reached the top of the inverted section
+                if (currentGeneration < invertedSectionTop)
+                {
+                    InvertPlatform(platform);
+                }
+                // otherwise we can reset
+                else
+                {
+                    // explicitly uninvert to avoid bugs
+                    UninvertPlatform(platform);
+                    inverted = false;
+                }
+            }
+            // we're not planning to invert, make sure we're base
+            // also decide if we want to invert
+            else
+            {
+                UninvertPlatform(platform);
+            }
+
+            currentGeneration++;
+        }
+
+        offscreenPlatforms.Clear();
+    }
+
     void OnPlayerJump(PlayerJumpEvent e)
     {
         // on first jump, spawn platforms
         if (e.firstJump)
         {
             StartCoroutine(SpawnPlatforms());
-        }
-        // after that, currentPlatform gets moved up after a couple jumps
-        else
-        {
-            // decide whether to invert section if we haven't yet
-            if(!inverted)
-            {
-                DecideInvertSection();
-            }
-
-            bool firstPlatformMoved = false;
-
-            foreach (GameObject platform in platforms) {
-                float currentDistanceToPlayer = platform.transform.position.y - e.player.transform.position.y;
-                float offscreenDist = -offscreenNumPlatforms * platformSeparation; // ex: -4 * 4 = 16 units before we shuffle out the platform
-
-                // if the player is high enough, we need to rotate this platform
-                if (currentDistanceToPlayer < offscreenDist)
-                {
-                    Vector3 newPlatPos = MovePlatformToTop(platform);
-
-                    // we are planning to invert
-                    if (inverted && !firstPlatformMoved)
-                    {
-                        // publish an invert event telling us whether we're  on our first invert
-                        EventBus.Publish(
-                            new SectionInvertEvent(
-                                currentGeneration,
-                                !hasInverted,
-                                platformSeparation,
-                                newPlatPos.x >= 0 // move left if platform is on right side of screen
-                            )
-                        );
-
-                        // if we invert for the first time, we need to put out an event to
-                        // get ready to do a tutorial
-                        if (!hasInverted)
-                        {
-                            hasInverted = true;
-                        }
-
-                        firstPlatformMoved = true;
-                    }
-
-                    if(inverted)
-                    {
-                        // only actually invert if we haven't reached the top of the inverted section
-                        if (currentGeneration < invertedSectionTop)
-                        {
-                            InvertPlatform(platform);
-                        }
-                        // otherwise we can reset
-                        else
-                        {
-                            // explicitly uninvert to avoid bugs
-                            UninvertPlatform(platform);
-                            inverted = false;
-                        }
-                    }
-                    // we're not planning to invert, make sure we're base
-                    // also decide if we want to invert
-                    else
-                    {
-                        UninvertPlatform(platform);
-                    }
-
-                    currentGeneration++;
-                }
-            }
         }
     }
 
