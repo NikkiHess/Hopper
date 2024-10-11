@@ -6,6 +6,7 @@ public class MovementDirectionLooker : MonoBehaviour
 {
     public float rotationSpeed = 5f;
     public float maxRotationAngle = 45f;
+    public float velocityThreshold = 0.1f;
 
     Rigidbody rb;
     Quaternion initialRotation;
@@ -22,7 +23,7 @@ public class MovementDirectionLooker : MonoBehaviour
         Vector3 velocity = rb.velocity;
 
         // rotate to looking direction
-        if (velocity != Vector3.zero)
+        if (velocity.magnitude > velocityThreshold)
         {
             // get the movement direction
             Vector3 movementDir = -velocity.normalized;
