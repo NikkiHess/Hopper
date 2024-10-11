@@ -296,7 +296,6 @@ MonoBehaviour:
     type: 3}
   maxXMagnitude: 4
   platformSeparation: 4
-  offscreenNumPlatforms: 2
   numPlatformsToGenerate: 7
   invertedRange: {x: 4, y: 10}
   percentInvertChance: 10
@@ -310,6 +309,7 @@ MonoBehaviour:
   translucentBase: {fileID: 2100000, guid: c36f314f95fdc124bb0600df4b3bb721, type: 2}
   outline: {fileID: 2100000, guid: aec7277659d561e4a8e2b5da49e50906, type: 2}
   translucentOutline: {fileID: 2100000, guid: 4cd6c4d9d9af1f944824d078a2382e8e, type: 2}
+  offscreenPlatforms: []
 --- !u!1 &208860376
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetWidth: 1080
   targetHeight: 1920
+  scalingFactor: 0.75
 --- !u!1 &341128642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,9 +1648,10 @@ GameObject:
   - component: {fileID: 973512540}
   - component: {fileID: 973512539}
   - component: {fileID: 973512538}
+  - component: {fileID: 973512544}
   - component: {fileID: 973512542}
   - component: {fileID: 973512543}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Starter Platform
   m_TagString: Starter Platform
   m_Icon: {fileID: 0}
@@ -1786,6 +1788,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &973512544
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973512537}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &981562825
 GameObject:
   m_ObjectHideFlags: 0

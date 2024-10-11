@@ -7,13 +7,13 @@ public class OneWayPlatform : MonoBehaviour
     public bool inverted = false;
     bool playerInverted = false;
 
-    BoxCollider boxCollider;
+    //BoxCollider boxCollider;
     GameObject player;
     Renderer _renderer; // the renderer attached to this GameObject
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
+        //boxCollider = GetComponent<BoxCollider>();
         player = GameObject.FindGameObjectWithTag("Player");
         _renderer = GetComponent<Renderer>();
     }
@@ -51,7 +51,7 @@ public class OneWayPlatform : MonoBehaviour
                 if (inverted == player.GetComponent<PlayerController>().inverted)
                 {
                     // allow collision
-                    boxCollider.isTrigger = false;
+                    gameObject.layer = LayerMask.NameToLayer("Collidable Platform");
                 }
             }
         }
@@ -61,7 +61,7 @@ public class OneWayPlatform : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            boxCollider.isTrigger = true;
+            gameObject.layer = LayerMask.NameToLayer("Platform");
         }
     }
 }
