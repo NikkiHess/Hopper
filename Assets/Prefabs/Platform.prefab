@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2023290367001472888}
   - component: {fileID: -1423298632087452908}
   - component: {fileID: 7556357330079630729}
-  - component: {fileID: -6830277738500892010}
   m_Layer: 8
   m_Name: Platform
   m_TagString: Platform
@@ -149,7 +148,7 @@ MonoBehaviour:
   gray:
   - {fileID: 2100000, guid: c1d7a7fe6de836947a04ed1a78bbc82f, type: 2}
   - {fileID: 2100000, guid: de9df424155f9244b84fd18bf8e09d21, type: 2}
-  grayChance: 0.2
+  grayChance: 0.4
   translucent:
   - {fileID: 2100000, guid: c65f5f4b6a4357c4aad3512aa81a9b8f, type: 2}
   - {fileID: 2100000, guid: 160bd46cea6d2b448b61b8d35a96059f, type: 2}
@@ -169,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e5e897c06ff1f4eb3d6ce74c0a65f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnChance: 0.3
+  enemySpawnChance: 0.5
 --- !u!114 &7556357330079630729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,18 +196,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-6830277738500892010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6858969503673038725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 444440cfe84e70f4dac577755af72c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5042780156523014099
 PrefabInstance:
   m_ObjectHideFlags: 0

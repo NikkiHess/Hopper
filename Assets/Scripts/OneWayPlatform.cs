@@ -55,7 +55,7 @@ public class OneWayPlatform : MonoBehaviour
             if (player.GetComponent<Rigidbody>().velocity.y < 0)
             {
                 // only allow collision if player + platform are in the same dimension
-                if (inverted == player.GetComponent<PlayerController>().inverted)
+                if (isGray || inverted == player.GetComponent<PlayerController>().inverted)
                 {
                     // allow collision
                     gameObject.layer = LayerMask.NameToLayer("Collidable Platform");
