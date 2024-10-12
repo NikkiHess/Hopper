@@ -2,36 +2,43 @@ using UnityEngine;
 
 public class OneWayPlatform : MonoBehaviour
 {
+    public bool isGray = false;
+    public Material[] gray;
+    [SerializeField] [Range(0f, 1f)] float grayChance = 0.5f;
+
     public Material[] translucent, nonTranslucent; // the non-translucent materials
 
     public bool inverted = false;
     bool playerInverted = false;
-
-    //BoxCollider boxCollider;
+    
     GameObject player;
     Renderer _renderer; // the renderer attached to this GameObject
 
     private void Start()
     {
-        //boxCollider = GetComponent<BoxCollider>();
         player = GameObject.FindGameObjectWithTag("Player");
         _renderer = GetComponent<Renderer>();
+
+        isGray = UnityEngine.Random.Range(0f, 1f) < grayChance;
+        if (isGray) _renderer.materials = gray;
     }
 
     private void Update()
     {
-        playerInverted = player.GetComponent<PlayerController>().inverted;
+        if (!isGray) {
+            playerInverted = player.GetComponent<PlayerController>().inverted;
 
-        // if the player is in the right dimension, go non-translucent
-        if(inverted == playerInverted)
-        {
-            if(_renderer.materials != nonTranslucent)
-                _renderer.materials = nonTranslucent;
-        }
-        else
-        {
-            if (_renderer.materials != translucent)
-                _renderer.materials = translucent;
+            // if the player is in the right dimension, go non-translucent
+            if (inverted == playerInverted)
+            {
+                if (_renderer.materials != nonTranslucent)
+                    _renderer.materials = nonTranslucent;
+            }
+            else
+            {
+                if (_renderer.materials != translucent)
+                    _renderer.materials = translucent;
+            }
         }
     }
 

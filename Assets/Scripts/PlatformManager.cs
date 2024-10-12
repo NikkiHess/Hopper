@@ -55,6 +55,7 @@ public class PlatformManager : MonoBehaviour
         foreach (GameObject platform in offscreenPlatforms)
         {
             Vector3 newPlatPos = MovePlatformToTop(platform);
+            platform.GetComponent<Platform>().TrySpawnEnemy();
 
             // we are planning to invert
             if (inverted && !firstPlatformMoved)
@@ -133,12 +134,13 @@ public class PlatformManager : MonoBehaviour
 
             // create an instance
             GameObject instance = Instantiate(platformPrefab, pos, Quaternion.identity, transform);
-
             platforms.Add(instance);
+
+            if (i > 1) instance.GetComponent<Platform>().TrySpawnEnemy();
 
             currentGeneration++;
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(3 / numPlatformsToGenerate);
         }
     }
 

@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 41602218}
   - component: {fileID: 41602219}
   m_Layer: 0
-  m_Name: Shuffling Platforms
+  m_Name: Platform Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,9 +296,9 @@ MonoBehaviour:
     type: 3}
   maxXMagnitude: 4
   platformSeparation: 4
-  numPlatformsToGenerate: 7
+  numPlatformsToGenerate: 8
   invertedRange: {x: 4, y: 10}
-  percentInvertChance: 10
+  percentInvertChance: 15
   invertedBase: {fileID: 2100000, guid: f857b7ce56659054ba2a1a20cfad946b, type: 2}
   invertedTranslucentBase: {fileID: 2100000, guid: c65f5f4b6a4357c4aad3512aa81a9b8f,
     type: 2}
@@ -2344,6 +2344,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 5
   maxRotationAngle: 45
+  velocityThreshold: 0.1
+  toRotate: {fileID: 1284701707}
+--- !u!114 &1536625756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585628602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe5f11e57234d645ba468ea709c4644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1702235070
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,6 +3039,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 6
       addedObject: {fileID: 1536625747}
+    - targetCorrespondingSourceObject: {fileID: 1065420358037715074, guid: 1075ee861bf195a4880b79e75aa43a89,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1536625756}
   m_SourcePrefab: {fileID: 100100000, guid: 1075ee861bf195a4880b79e75aa43a89, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

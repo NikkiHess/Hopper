@@ -11,6 +11,8 @@ public class MovementDirectionLooker : MonoBehaviour
     Rigidbody rb;
     Quaternion initialRotation;
 
+    [SerializeField] GameObject toRotate;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
