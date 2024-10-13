@@ -37,5 +37,9 @@ public class OffscreenDetector : MonoBehaviour
         {
             onOffscreen.Invoke();
         }
+        if(onOffscreen == null)
+        {
+            Debug.Log("onOffscreen is null");
+        }
     }
 }
