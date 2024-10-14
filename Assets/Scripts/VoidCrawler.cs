@@ -10,6 +10,8 @@ public class VoidCrawler : MonoBehaviour
     float leftBoundX;
     float rightBoundX;
 
+    PossiblyOneWayInvertible powi;
+
     void Start()
     {
         platform = transform.parent.gameObject; // the parent platform
@@ -19,6 +21,8 @@ public class VoidCrawler : MonoBehaviour
         Renderer renderer = platform.GetComponent<Renderer>(); // get platform renderer
         leftBoundX = renderer.bounds.min.x; // platform left bound
         rightBoundX = renderer.bounds.max.x; // platform right bound
+
+        powi = GetComponent<PossiblyOneWayInvertible>();
     }
 
     void Update()

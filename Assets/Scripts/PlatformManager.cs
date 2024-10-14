@@ -74,7 +74,7 @@ public class PlatformManager : MonoBehaviour
                 if (!hasInverted)
                 {
                     // first inverted platform needs to not be gray
-                    platform.GetComponent<OneWayPlatform>().isGray = false;
+                    platform.GetComponent<PossiblyOneWayInvertible>().isGray = false;
                     hasInverted = true;
                 }
 
@@ -187,22 +187,12 @@ public class PlatformManager : MonoBehaviour
 
     void InvertPlatform(GameObject platform)
     {
-        Renderer platRenderer = platform.GetComponent<Renderer>();
-
-        OneWayPlatform owp = platform.GetComponent<OneWayPlatform>();
-        owp.inverted = true;
-        owp.nonTranslucent = new[] { invertedBase, invertedOutline };
-        owp.translucent = new[] { invertedTranslucentBase, invertedTranslucentOutline };
+        platform.GetComponent<PossiblyOneWayInvertible>().inverted = true;
     }
 
     void UninvertPlatform(GameObject platform)
     {
-        Renderer platRenderer = platform.GetComponent<Renderer>();
-
-        OneWayPlatform owp = platform.GetComponent<OneWayPlatform>();
-        owp.inverted = false;
-        owp.nonTranslucent = new[] { _base, outline };
-        owp.translucent = new[] { translucentBase, translucentOutline };
+        platform.GetComponent<PossiblyOneWayInvertible>().inverted = false;
     }
 
     private float GetRandomX()

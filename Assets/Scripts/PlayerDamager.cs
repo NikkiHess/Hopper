@@ -6,8 +6,13 @@ public class PlayerDamager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameObject player = collision.gameObject;
-            player.GetComponent<HealthManager>().Damage();
+            bool inverted = GetComponent<PossiblyOneWayInvertible>().inverted;
+            bool playerInverted = collision.gameObject.GetComponent<PlayerController>().inverted;
+            if (inverted == playerInverted)
+            {
+                GameObject player = collision.gameObject;
+                player.GetComponent<HealthManager>().Damage();
+            }
         }
     }
 }
