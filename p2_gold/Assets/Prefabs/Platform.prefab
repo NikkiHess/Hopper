@@ -1,0 +1,211 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6858969503673038725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8107475508431587712}
+  - component: {fileID: 2995615440514555383}
+  - component: {fileID: 5455240827749731038}
+  - component: {fileID: 834982525876642958}
+  - component: {fileID: -2205915549633471696}
+  - component: {fileID: 1242154129198845850}
+  - component: {fileID: -1423298632087452908}
+  - component: {fileID: 7556357330079630729}
+  m_Layer: 8
+  m_Name: Platform
+  m_TagString: Platform
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8107475508431587712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858969503673038725}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.77, z: 0}
+  m_LocalScale: {x: 3.4350019, y: 0.34350023, z: 3.4350019}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2995615440514555383
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858969503673038725}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5455240827749731038
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858969503673038725}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2e9ef0b8b8b55bd48800a172b6898a5b, type: 2}
+  - {fileID: 2100000, guid: aec7277659d561e4a8e2b5da49e50906, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &834982525876642958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858969503673038725}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &-2205915549633471696
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858969503673038725}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1242154129198845850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858969503673038725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020613674a247d94ea5b55ed53ff6cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBeGray: 1
+  isGray: 0
+  gray:
+  - {fileID: 2100000, guid: c1d7a7fe6de836947a04ed1a78bbc82f, type: 2}
+  - {fileID: 2100000, guid: de9df424155f9244b84fd18bf8e09d21, type: 2}
+  grayChance: 0.5
+  toInvert:
+  - {fileID: 6858969503673038725}
+  isSpikes: 0
+  translucent:
+  - {fileID: 2100000, guid: c36f314f95fdc124bb0600df4b3bb721, type: 2}
+  - {fileID: 2100000, guid: 4cd6c4d9d9af1f944824d078a2382e8e, type: 2}
+  nonTranslucent:
+  - {fileID: 2100000, guid: 2e9ef0b8b8b55bd48800a172b6898a5b, type: 2}
+  - {fileID: 2100000, guid: aec7277659d561e4a8e2b5da49e50906, type: 2}
+  invertedTranslucent:
+  - {fileID: 2100000, guid: c65f5f4b6a4357c4aad3512aa81a9b8f, type: 2}
+  - {fileID: 2100000, guid: 160bd46cea6d2b448b61b8d35a96059f, type: 2}
+  invertedNonTranslucent:
+  - {fileID: 2100000, guid: f857b7ce56659054ba2a1a20cfad946b, type: 2}
+  - {fileID: 2100000, guid: 84bdc8c999593a74794315320e05e333, type: 2}
+  inverted: 0
+--- !u!114 &-1423298632087452908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858969503673038725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e5e897c06ff1f4eb3d6ce74c0a65f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawnChance: 0.5
+  obstacleSpawnChance: 0.8
+  voidCrawler: {fileID: 1727864176963535430, guid: d2c1c078fd7ec654ba0e665c6c740876,
+    type: 3}
+  spikes: {fileID: 8183289436232200237, guid: f934ef3814e04a044830d32b57eccaff, type: 3}
+--- !u!114 &7556357330079630729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858969503673038725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476c84ec81779f449299f893c4aa70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onOffscreen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1423298632087452908}
+        m_TargetAssemblyTypeName: Platform, Assembly-CSharp
+        m_MethodName: MarkOffscreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
