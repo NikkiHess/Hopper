@@ -12,11 +12,6 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] Vector2Int invertedRange; // min and max inverted section sizes
     [SerializeField] [Range(1, 100)] int percentInvertChance = 1;
 
-    [SerializeField] Material invertedBase, invertedTranslucentBase;
-    [SerializeField] Material invertedOutline, invertedTranslucentOutline;
-    [SerializeField] Material _base, translucentBase;
-    [SerializeField] Material outline, translucentOutline;
-
     int currentGeneration = 0; // number of times we generated or moved a platform
     bool inverted = false; // invert
     bool hasInverted = false; // have we reached the inverted section for the first time?
@@ -187,12 +182,16 @@ public class PlatformManager : MonoBehaviour
 
     void InvertPlatform(GameObject platform)
     {
-        platform.GetComponent<PossiblyOneWayInvertible>().inverted = true;
+        PossiblyOneWayInvertible invertible = platform.GetComponent<PossiblyOneWayInvertible>();
+        if (!invertible.isGray)
+            invertible.inverted = true;
     }
 
     void UninvertPlatform(GameObject platform)
     {
-        platform.GetComponent<PossiblyOneWayInvertible>().inverted = false;
+        PossiblyOneWayInvertible invertible = platform.GetComponent<PossiblyOneWayInvertible>();
+        if (!invertible.isGray)
+            invertible.inverted = false;
     }
 
     private float GetRandomX()

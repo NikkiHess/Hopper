@@ -46,17 +46,7 @@ public class PossiblyOneWayInvertible : MonoBehaviour
             }
         }
 
-        if (canBeGray)
-        {
-            isGray = UnityEngine.Random.Range(0f, 1f) < grayChance;
-            if (isGray)
-            {
-                foreach (GameObject go in toInvert)
-                {
-                    go.GetComponent<Renderer>().materials = gray;
-                }
-            }
-        }
+        DecideGray();
 
         if(isOneWay)
         {
@@ -170,6 +160,21 @@ public class PossiblyOneWayInvertible : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 gameObject.layer = LayerMask.NameToLayer("Platform");
+            }
+        }
+    }
+
+    public void DecideGray()
+    {
+        if (canBeGray)
+        {
+            isGray = UnityEngine.Random.Range(0f, 1f) < grayChance;
+            if (isGray)
+            {
+                foreach (GameObject go in toInvert)
+                {
+                    go.GetComponent<Renderer>().materials = gray;
+                }
             }
         }
     }
