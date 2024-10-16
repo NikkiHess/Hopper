@@ -45,11 +45,9 @@ public class PlayerController : MonoBehaviour
     {
         if (controlsEnabled)
         {
-            // handle jumping
+            // handle first time jumping
             if (Input.GetKey(KeyCode.Space) && isOnPlatform)
             {
-                rb.velocity = new Vector3(rb.velocity.x, jumpPower);
-
                 // if we jump for the first time...
                 // publish a first jump event
                 // and spawn our platforms
@@ -62,6 +60,11 @@ public class PlayerController : MonoBehaviour
                 {
                     EventBus.Publish(new PlayerJumpEvent(gameObject, false));
                 }
+            }
+
+            if(isOnPlatform && hasJumpedForFirstTime)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, jumpPower);
             }
 
             // handle horizontal movement

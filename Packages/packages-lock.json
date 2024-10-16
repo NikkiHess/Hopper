@@ -1,13 +1,12 @@
 {
   "dependencies": {
     "com.ikaroon.tmp3d": {
-      "version": "https://github.com/Ikaroon/TMP3D.git",
+      "version": "file:C:/Users/nkhess/Downloads/TMP3D-main",
       "depth": 0,
-      "source": "git",
+      "source": "local",
       "dependencies": {
         "com.unity.textmeshpro": "3.0.6"
-      },
-      "hash": "1119647e05592c12108e5860b0b3a96de1e85220"
+      }
     },
     "com.unity.burst": {
       "version": "1.8.17",
