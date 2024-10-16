@@ -299,6 +299,12 @@ MonoBehaviour:
   numPlatformsToGenerate: 8
   invertedRange: {x: 4, y: 10}
   percentInvertChance: 15
+  enemySpawnChance: 0.5
+  spikeSpawnChance: 0.5
+  voidCrawlerPrefab: {fileID: 1727864176963535430, guid: d2c1c078fd7ec654ba0e665c6c740876,
+    type: 3}
+  spikePrefab: {fileID: 8183289436232200237, guid: f934ef3814e04a044830d32b57eccaff,
+    type: 3}
   offscreenPlatforms: []
 --- !u!1 &208860376
 GameObject:
@@ -536,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073fa618c827a8241b92b71c2d4262a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetY: 10
+  targetY: 13
   lerpSpeed: 1
   doLerp: 0
   hasLerped: 0
@@ -724,7 +730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 19.31}
+  m_AnchoredPosition: {x: 0, y: 23.37}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &330585543
@@ -823,7 +829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5}
+  m_AnchoredPosition: {x: 0, y: 9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330585547
@@ -2661,7 +2667,7 @@ PrefabInstance:
     - target: {fileID: 6500244447051666234, guid: 1075ee861bf195a4880b79e75aa43a89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.81
+      value: 21.87
       objectReference: {fileID: 0}
     - target: {fileID: 6500244447051666234, guid: 1075ee861bf195a4880b79e75aa43a89,
         type: 3}
