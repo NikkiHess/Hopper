@@ -737,7 +737,7 @@ Camera:
     height: 1920
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 76
+  field of view: 75
   orthographic: 0
   orthographic size: 9.5
   m_Depth: -1
@@ -771,7 +771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 9}
+  m_AnchoredPosition: {x: 0, y: 7.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330585547
@@ -846,7 +846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetWidth: 1080
   targetHeight: 1920
-  scalingFactor: 0.75
+  scalingFactor: 0.8
 --- !u!1 &341128642
 GameObject:
   m_ObjectHideFlags: 0
@@ -2633,6 +2633,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 330585546}
   - {fileID: 391346667}
   - {fileID: 410087041}
   - {fileID: 832575519}
@@ -2644,4 +2645,3 @@ SceneRoots:
   - {fileID: 1702235074}
   - {fileID: 237480008}
   - {fileID: 869204512}
-  - {fileID: 330585546}

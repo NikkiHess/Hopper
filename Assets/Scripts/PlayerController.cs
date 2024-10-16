@@ -6,28 +6,26 @@ public class PlayerController : MonoBehaviour
     public bool inverted = false;
     public bool hasJumpedForFirstTime = false; // tells us whether the player has jumped for the first time
 
-    [SerializeField]
-    private float jumpPower = 1;
+    [SerializeField] float jumpPower = 1;
+    [SerializeField] float speed = 1;
+    [SerializeField] float edgeThreshold = 0.15f;
 
-    [SerializeField]
-    private float speed = 1;
+    bool isOnPlatform = false; // are we able to jump?
+    bool controlsEnabled = false; // have we finished the opening scene?
+    bool hasInverted = false;
 
-    private bool isOnPlatform = false; // are we able to jump?
-    private bool controlsEnabled = false; // have we finished the opening scene?
-    private bool hasInverted = false;
+    Subscription<PlatformTouchEvent> starterPlatTouchSub;
+    Subscription<GameOverEvent> gameOverSub;
 
-    private Subscription<PlatformTouchEvent> starterPlatTouchSub;
-    private Subscription<GameOverEvent> gameOverSub;
-
-    private Rigidbody rb;
-    private Renderer _renderer;
-    private GameObject starterPlat;
+    Rigidbody rb;
+    Renderer _renderer;
+    GameObject starterPlat;
 
     float leftCameraEdgeX, rightCameraEdgeX;
 
-    [SerializeField] private Material wavyOutline;
-    [SerializeField] private Material wavyOutlineInverted;
-    [SerializeField] private Material normalOutline;
+    [SerializeField] Material wavyOutline;
+    [SerializeField] Material wavyOutlineInverted;
+    [SerializeField] Material normalOutline;
 
     private void Start()
     {
@@ -98,8 +96,7 @@ public class PlayerController : MonoBehaviour
                 doInvert = true;
             }
 
-            float threshold = 0.15f;
-            if (viewportLeft.x < threshold || viewportRight.x > 1 - threshold)
+            if (viewportLeft.x < edgeThreshold || viewportRight.x > 1 - edgeThreshold)
             {
                 List<Material> materials = new()
                 {
