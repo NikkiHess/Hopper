@@ -12,6 +12,7 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] Vector2Int invertedRange; // min and max inverted section sizes
     [SerializeField] [Range(1, 100)] int percentInvertChance = 1;
 
+    [SerializeField] int numSafePlatforms = 2;
     [SerializeField][Range(0f, 1f)] float enemySpawnChance = 0.5f;
     [SerializeField][Range(0f, 1f)] float spikeSpawnChance = 0.5f;
     [SerializeField] GameObject voidCrawlerPrefab;
@@ -129,14 +130,13 @@ public class PlatformManager : MonoBehaviour
         );
 
         PossiblyOneWayInvertible invertible = platform.GetComponent<PossiblyOneWayInvertible>();
-        invertible.DecideGray();
 
         if (invertible.isGray)
         {
             float enemySpawnFloat = UnityEngine.Random.Range(0, 1f);
             float obstacleSpawnFloat = UnityEngine.Random.Range(0, 1f);
 
-            if (enemySpawnFloat < enemySpawnChance)
+            if (enemySpawnFloat <= enemySpawnChance)
             {
                 Renderer vcRenderer = voidCrawlerPrefab.GetComponent<Renderer>();
 
@@ -151,7 +151,7 @@ public class PlatformManager : MonoBehaviour
                 // since enemy spawned, decrease chance slightly
                 enemySpawnChance -= 0.1f;
             }
-            else if (obstacleSpawnFloat < spikeSpawnChance)
+            else if (obstacleSpawnFloat <= spikeSpawnChance)
             {
                 // no adjustments needed here
                 platform.spikeInstance = Instantiate(spikePrefab, spawnPos, Quaternion.identity, platform.transform);
@@ -194,7 +194,12 @@ public class PlatformManager : MonoBehaviour
             GameObject platform = Instantiate(platformPrefab, pos, Quaternion.identity, transform);
             platforms.Add(platform);
 
-            if (i > 1) TrySpawnEnemyOrObstacle(platform.GetComponent<Platform>());
+            // if we've passed the number of safe platforms, start gray platforms and enemy/obstacle spawns
+            if (i > numSafePlatforms)
+            {
+                platform.GetComponent<PossiblyOneWayInvertible>().DecideGray();
+                TrySpawnEnemyOrObstacle(platform.GetComponent<Platform>());
+            }
 
             currentGeneration++;
 
@@ -220,6 +225,8 @@ public class PlatformManager : MonoBehaviour
         newPos.y = highestY + platformSeparation;
 
         platform.transform.position = newPos;
+        platform.GetComponent<PossiblyOneWayInvertible>().DecideGray();
+
         // spawn after moving
         TrySpawnEnemyOrObstacle(platform.GetComponent<Platform>());
 

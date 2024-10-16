@@ -46,8 +46,6 @@ public class PossiblyOneWayInvertible : MonoBehaviour
             }
         }
 
-        DecideGray();
-
         if(isOneWay)
         {
             gameObject.layer = LayerMask.NameToLayer("Platform");
@@ -60,7 +58,14 @@ public class PossiblyOneWayInvertible : MonoBehaviour
 
     private void Update()
     {
-        pVelocity = player.GetComponent<Rigidbody>().velocity;
+        if (player == null) return;
+
+        Rigidbody playerRb = player.GetComponent<Rigidbody>();
+        if (playerRb != null)
+        {
+            pVelocity = playerRb.velocity;
+        }
+
         if (!isGray) {
             playerInverted = player.GetComponent<PlayerController>().inverted;
 

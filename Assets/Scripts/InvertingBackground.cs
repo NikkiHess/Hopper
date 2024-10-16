@@ -7,18 +7,27 @@ public class InvertingBackground : MonoBehaviour
     [SerializeField] Material background, invertedBackground;
     PlayerController playerController; // the player's PlayerController script
     Renderer _renderer;
-    bool previousInversionState;
+    bool previousInversionState = false;
 
     private void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerController = player.GetComponent<PlayerController>();
+        }
         _renderer = GetComponent<Renderer>();
 
-        previousInversionState = !playerController.inverted;
+        if (playerController != null)
+        {
+            previousInversionState = !playerController.inverted;
+        }
     }
 
     private void Update()
     {
+        if(playerController == null) return;
+
         // only worry about updating when we need to
         if (playerController.inverted != previousInversionState)
         {
