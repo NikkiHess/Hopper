@@ -12,6 +12,11 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] Vector2Int invertedRange; // min and max inverted section sizes
     [SerializeField] [Range(1, 100)] int percentInvertChance = 1;
 
+    [SerializeField][Range(0f, 1f)] float enemySpawnChance = 0.5f;
+    [SerializeField][Range(0f, 1f)] float spikeSpawnChance = 0.5f;
+    [SerializeField] GameObject voidCrawlerPrefab;
+    [SerializeField] GameObject spikePrefab;
+
     int currentGeneration = 0; // number of times we generated or moved a platform
     bool inverted = false; // invert
     bool hasInverted = false; // have we reached the inverted section for the first time?
@@ -113,6 +118,63 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
+    public void TrySpawnEnemyOrObstacle(Platform platform)
+    {
+        Renderer r = platform.GetComponent<Renderer>();
+        Bounds e = r.bounds;
+        Vector3 spawnPos = new Vector3(
+            e.center.x,
+            e.center.y + e.extents.y, // just above the platform?
+            e.center.z
+        );
+
+        PossiblyOneWayInvertible invertible = platform.GetComponent<PossiblyOneWayInvertible>();
+        invertible.DecideGray();
+
+        if (invertible.isGray)
+        {
+            float enemySpawnFloat = UnityEngine.Random.Range(0, 1f);
+            float obstacleSpawnFloat = UnityEngine.Random.Range(0, 1f);
+
+            if (enemySpawnFloat < enemySpawnChance)
+            {
+                Renderer vcRenderer = voidCrawlerPrefab.GetComponent<Renderer>();
+
+                spawnPos += new Vector3(0, vcRenderer.bounds.extents.y);
+                GameObject instance = Instantiate(voidCrawlerPrefab, spawnPos, Quaternion.identity, platform.transform);
+                instance.transform.localScale = new Vector3(.18f, 1.62f, .18f);
+
+                platform.voidCrawlerInstance = instance;
+
+                // since spikes didn't spawn, increase chance slightly
+                spikeSpawnChance += 0.05f;
+                // since enemy spawned, decrease chance slightly
+                enemySpawnChance -= 0.1f;
+            }
+            else if (obstacleSpawnFloat < spikeSpawnChance)
+            {
+                // no adjustments needed here
+                platform.spikeInstance = Instantiate(spikePrefab, spawnPos, Quaternion.identity, platform.transform);
+
+                // since enemy didn't spawn, increase chance slightly
+                enemySpawnChance += 0.05f;
+                // since spikes spawned, decrease chance slightly
+                spikeSpawnChance -= 0.1f;
+            }
+            else
+            {
+                // since enemy didn't spawn, increase chance slightly
+                enemySpawnChance += 0.05f;
+
+                // since spikes didn't spawn, increase chance slightly
+                spikeSpawnChance += 0.05f;
+            }
+        }
+
+        Mathf.Clamp(enemySpawnChance, 0, 1);
+        Mathf.Clamp(spikeSpawnChance, 0, 1);
+    }
+
     IEnumerator SpawnPlatforms()
     {
         // create numPlatforms platforms for our pool
@@ -129,10 +191,10 @@ public class PlatformManager : MonoBehaviour
             pos.y = platformSeparation + i * platformSeparation;
 
             // create an instance
-            GameObject instance = Instantiate(platformPrefab, pos, Quaternion.identity, transform);
-            platforms.Add(instance);
+            GameObject platform = Instantiate(platformPrefab, pos, Quaternion.identity, transform);
+            platforms.Add(platform);
 
-            if (i > 1) instance.GetComponent<Platform>().TrySpawnEnemyOrObstacle();
+            if (i > 1) TrySpawnEnemyOrObstacle(platform.GetComponent<Platform>());
 
             currentGeneration++;
 
@@ -159,7 +221,7 @@ public class PlatformManager : MonoBehaviour
 
         platform.transform.position = newPos;
         // spawn after moving
-        platform.GetComponent<Platform>().TrySpawnEnemyOrObstacle();
+        TrySpawnEnemyOrObstacle(platform.GetComponent<Platform>());
 
         return newPos;
     }

@@ -99,19 +99,22 @@ public class PlayerController : MonoBehaviour
             }
 
             float threshold = 0.15f;
-            Debug.Log(viewportLeft.x + " " + viewportRight.x);
             if (viewportLeft.x < threshold || viewportRight.x > 1 - threshold)
             {
-                List<Material> materials = new();
-                materials.Add(_renderer.materials[0]);
-                materials.Add(inverted ? wavyOutlineInverted : wavyOutline);
+                List<Material> materials = new()
+                {
+                    _renderer.materials[0],
+                    inverted ? wavyOutlineInverted : wavyOutline
+                };
                 _renderer.SetMaterials(materials);
             }
             else
             {
-                List<Material> materials = new();
-                materials.Add(_renderer.materials[0]);
-                materials.Add(normalOutline);
+                List<Material> materials = new()
+                {
+                    _renderer.materials[0],
+                    normalOutline
+                };
                 _renderer.SetMaterials(materials);
             }
 

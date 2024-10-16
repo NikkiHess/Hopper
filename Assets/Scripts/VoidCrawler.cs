@@ -18,9 +18,9 @@ public class VoidCrawler : MonoBehaviour
 
         movingRight = UnityEngine.Random.Range(0, 1f) > 0.5f;
 
-        Renderer renderer = platform.GetComponent<Renderer>(); // get platform renderer
-        leftBoundX = renderer.bounds.min.x; // platform left bound
-        rightBoundX = renderer.bounds.max.x; // platform right bound
+        Renderer platformRenderer = platform.GetComponent<Renderer>(); // get platform renderer
+        leftBoundX = platformRenderer.bounds.min.x; // platform left bound
+        rightBoundX = platformRenderer.bounds.max.x; // platform right bound
 
         powi = GetComponent<PossiblyOneWayInvertible>();
     }
